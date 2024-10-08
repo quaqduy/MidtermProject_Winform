@@ -57,11 +57,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PiStoreDBDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="PiStoreDBDataSet1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PiStoreDBDataSet1.xsd</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -87,17 +82,6 @@
     </None>
     <None Include="PiStoreDBDataSet.xss">
       <DependentUpon>PiStoreDBDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="PiStoreDBDataSet1.xsc">
-      <DependentUpon>PiStoreDBDataSet1.xsd</DependentUpon>
-    </None>
-    <None Include="PiStoreDBDataSet1.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>PiStoreDBDataSet1.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="PiStoreDBDataSet1.xss">
-      <DependentUpon>PiStoreDBDataSet1.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
