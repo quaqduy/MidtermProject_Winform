@@ -98,14 +98,19 @@ namespace MidtermProject_519H0157
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            string msg = loginAuth(txtEmail, txtPassword);
-            if (!string.IsNullOrEmpty(msg))
-            {
-                lblMessage.Visible = true;
-                lblMessage.Text = msg;
-            }
+            //string msg = loginAuth(txtEmail, txtPassword);
+            //if (!string.IsNullOrEmpty(msg))
+            //{
+            //    lblMessage.Visible = true;
+            //    lblMessage.Text = msg;
+            //}
 
-            MessageBox.Show("Sucess to login ");
+            //MessageBox.Show("Sucess to login ");
+
+            //after signIn open dashboad
+            DashBoard DashBoard = new DashBoard();
+            this.Hide();
+            DashBoard.Show();
         }
 
         public string loginAuth(TextBox txtEmail, TextBox txtPassword)
