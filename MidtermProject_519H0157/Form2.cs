@@ -14,7 +14,6 @@ namespace MidtermProject_519H0157
 {
     public partial class DashBoard : Form
     {
-        private string connectionString = @"Data Source=QUAQDUY;Initial Catalog=PiStoreDB;Integrated Security=True";
         public DashBoard()
         {
             InitializeComponent();
@@ -49,41 +48,41 @@ namespace MidtermProject_519H0157
             // SQL query to get data from Employee table
             string query = "SELECT ID, Name, Email, Phone, Address, Salary, HireDate FROM Employee";
 
-            // Create connections and execute queries
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            // Using the DBconnection class to manage the connection
+            DBconnection db = new DBconnection(); // Initialize connection through DBconnection
+
+            try
             {
-                try
+                // Execute the query and get the SqlDataReader using DBconnection's ExecuteReader method
+                using (SqlDataReader reader = db.ExecuteReader(query))
                 {
-                    conn.Open(); 
+                    // Clear old items in ListView
+                    employeeList.Items.Clear();
 
-                    using (SqlCommand command = new SqlCommand(query, conn))
+                    // Read data from SqlDataReader and add it to ListView
+                    while (reader.Read())
                     {
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            // Delete old items in ListView
-                            employeeList.Items.Clear();
+                        // Create a ListViewItem with data from the row in the SqlDataReader
+                        ListViewItem item = new ListViewItem(reader["ID"].ToString());
+                        item.SubItems.Add(reader["Name"].ToString());
+                        item.SubItems.Add(reader["Email"].ToString());
+                        item.SubItems.Add(reader["Phone"].ToString());
+                        item.SubItems.Add(reader["Address"].ToString());
+                        item.SubItems.Add(reader["Salary"].ToString());
+                        item.SubItems.Add(reader["HireDate"].ToString());
 
-                            // Read data from SqlDataReader and pour it into ListView
-                            while (reader.Read())
-                            {
-                                // Create a ListViewItem with data from the row in the SqlDataReader
-                                ListViewItem item = new ListViewItem(reader["ID"].ToString());
-                                item.SubItems.Add(reader["Name"].ToString());
-                                item.SubItems.Add(reader["Email"].ToString());
-                                item.SubItems.Add(reader["Phone"].ToString());
-                                item.SubItems.Add(reader["Address"].ToString());
-                                item.SubItems.Add(reader["Salary"].ToString());
-                                item.SubItems.Add(reader["HireDate"].ToString());
-                                // Add items to ListView
-                                employeeList.Items.Add(item);
-                            }
-                        }
+                        // Add the item to ListView
+                        employeeList.Items.Add(item);
                     }
                 }
-                catch (SqlException ex)
-                {
-                    MessageBox.Show("Database connection error: " + ex.Message);
-                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("Database connection error: " + ex.Message);
+            }
+            finally
+            {
+                db.CloseConnection(); // Ensure the connection is closed
             }
         }
 
@@ -157,22 +156,51 @@ namespace MidtermProject_519H0157
             }
         }
 
-        // Method to delete multiple employees
+        // Method to delete multiple employees using the existing ExecuteQuery method
         private void DeleteEmployees(List<string> ids)
         {
-            using (SqlConnection conn = new SqlConnection(@"Data Source=QUAQDUY;Initial Catalog=PiStoreDB;Integrated Security=True"))
+            // Ensure there are IDs to delete
+            if (ids == null || ids.Count == 0)
             {
-                conn.Open();
+                MessageBox.Show("No employee IDs provided for deletion.");
+                return;
+            }
 
-                // Create a delete query with multiple IDs
-                string query = "DELETE FROM Employee WHERE Id IN (" + string.Join(",", ids.Select(id => $"'{id}'")) + ")";
+            // Create a delete query with parameters
+            string query = "DELETE FROM Employee WHERE Id IN (" + string.Join(",", ids.Select((id, index) => $"@Id{index}")) + ")";
 
-                using (SqlCommand command = new SqlCommand(query, conn))
-                {
-                    command.ExecuteNonQuery(); // Execute the delete command
-                }
+            // Initialize DB connection
+            DBconnection db = new DBconnection(); // Create a new instance of DBconnection
+
+            // Prepare the query parameters
+            for (int i = 0; i < ids.Count; i++)
+            {
+                query = query.Replace($"@Id{i}", $"'{ids[i]}'");
+            }
+
+            try
+            {
+                // Execute the delete command using ExecuteQuery
+                db.ExecuteQuery(query); // Use your existing ExecuteQuery method
+            }
+            catch (SqlException ex)
+            {
+                // Handle any SQL exceptions
+                Console.WriteLine("Error while deleting employees: " + ex.Message);
+                MessageBox.Show("Error while deleting employees: " + ex.Message);
             }
         }
 
+        private void addBtn_Click(object sender, EventArgs e)
+        {
+            openAddForm();
+        }
+
+        //Use
+        private void openAddForm()
+        {
+            editEmployeeForm editEmployeeForm = new editEmployeeForm();
+            editEmployeeForm.Show(true);
+        }
     }
 }

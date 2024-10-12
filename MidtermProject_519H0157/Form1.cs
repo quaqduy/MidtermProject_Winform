@@ -17,10 +17,6 @@ namespace MidtermProject_519H0157
     {
 
         private Rectangle screenSize = Screen.PrimaryScreen.Bounds;                 // Get the dimensions of the primary screen
-        SqlConnection conn = new SqlConnection(
-            @"Data Source=QUAQDUY;Initial Catalog=PiStoreDB;Integrated Security=True"
-        );
-
 
         public loginForm()
         {
@@ -153,6 +149,10 @@ namespace MidtermProject_519H0157
             // Prepare the SQL query
             string query = "SELECT COUNT(*) FROM Account WHERE Email = @Email AND Password = @Password"; // Ensure the table name and fields are correct
 
+            // Using the DBconnection class to manage the connection
+            DBconnection db = new DBconnection(); // Initialize connection through DBconnection
+            SqlConnection conn = db.OpenConnection(); // Open the connection
+
             using (SqlCommand command = new SqlCommand(query, conn))
             {
                 command.Parameters.AddWithValue("@Email", email);
@@ -196,6 +196,5 @@ namespace MidtermProject_519H0157
                 return builder.ToString(); // Return the hashed password
             }
         }
-
     }
 }

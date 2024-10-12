@@ -31,6 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DashBoard));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.addBtn = new System.Windows.Forms.Button();
             this.delEmployeeBtn = new System.Windows.Forms.Button();
             this.employeeList = new System.Windows.Forms.ListView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -39,8 +41,6 @@
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.tabPage7 = new System.Windows.Forms.TabPage();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.addBtn = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -78,6 +78,29 @@
             this.tabPage1.Size = new System.Drawing.Size(798, 401);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Employees";
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.addBtn);
+            this.flowLayoutPanel1.Controls.Add(this.delEmployeeBtn);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(40, 322);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(716, 37);
+            this.flowLayoutPanel1.TabIndex = 3;
+            // 
+            // addBtn
+            // 
+            this.addBtn.Font = new System.Drawing.Font("MV Boli", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addBtn.Location = new System.Drawing.Point(621, 3);
+            this.addBtn.Name = "addBtn";
+            this.addBtn.Padding = new System.Windows.Forms.Padding(2);
+            this.addBtn.Size = new System.Drawing.Size(92, 30);
+            this.addBtn.TabIndex = 2;
+            this.addBtn.Text = "Add";
+            this.addBtn.UseVisualStyleBackColor = true;
+            this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
             // 
             // delEmployeeBtn
             // 
@@ -174,28 +197,6 @@
             this.tabPage7.TabIndex = 6;
             this.tabPage7.Text = "Generate Bill";
             this.tabPage7.UseVisualStyleBackColor = true;
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Controls.Add(this.addBtn);
-            this.flowLayoutPanel1.Controls.Add(this.delEmployeeBtn);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(40, 322);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(716, 37);
-            this.flowLayoutPanel1.TabIndex = 3;
-            // 
-            // addBtn
-            // 
-            this.addBtn.Font = new System.Drawing.Font("MV Boli", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addBtn.Location = new System.Drawing.Point(621, 3);
-            this.addBtn.Name = "addBtn";
-            this.addBtn.Padding = new System.Windows.Forms.Padding(2);
-            this.addBtn.Size = new System.Drawing.Size(92, 30);
-            this.addBtn.TabIndex = 2;
-            this.addBtn.Text = "Add";
-            this.addBtn.UseVisualStyleBackColor = true;
             // 
             // DashBoard
             // 
