@@ -52,6 +52,7 @@
     <Compile Include="addEmployeeForm.Designer.cs">
       <DependentUpon>addEmployeeForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="clientHandler.cs" />
     <Compile Include="DBconnection.cs" />
     <Compile Include="editEmployeeForm.cs">
       <SubType>Form</SubType>
@@ -59,6 +60,7 @@
     <Compile Include="editEmployeeForm.Designer.cs">
       <DependentUpon>editEmployeeForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="employeeHandler.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

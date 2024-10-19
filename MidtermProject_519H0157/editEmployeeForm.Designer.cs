@@ -1,6 +1,6 @@
 ﻿namespace MidtermProject_519H0157
 {
-    partial class editEmployeeForm
+    partial class editForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,14 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(editEmployeeForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(editForm));
             this.titleForm = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
+            this.name_label = new System.Windows.Forms.Label();
+            this.email_label = new System.Windows.Forms.Label();
+            this.phone_label = new System.Windows.Forms.Label();
+            this.address_label = new System.Windows.Forms.Label();
+            this.salary_label = new System.Windows.Forms.Label();
+            this.hireDate_label = new System.Windows.Forms.Label();
             this.nameEmployee = new System.Windows.Forms.TextBox();
             this.emailEmployee = new System.Windows.Forms.TextBox();
             this.phoneEmployee = new System.Windows.Forms.TextBox();
@@ -46,7 +46,7 @@
             this.addBtn = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.idEmployee = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.dateFomart = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // titleForm
@@ -59,59 +59,59 @@
             this.titleForm.TabIndex = 0;
             this.titleForm.Text = "Edit Information";
             // 
-            // label3
+            // name_label
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(51, 89);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Name";
+            this.name_label.AutoSize = true;
+            this.name_label.Location = new System.Drawing.Point(51, 89);
+            this.name_label.Name = "name_label";
+            this.name_label.Size = new System.Drawing.Size(35, 13);
+            this.name_label.TabIndex = 2;
+            this.name_label.Text = "Name";
             // 
-            // label4
+            // email_label
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(51, 124);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(32, 13);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Email";
+            this.email_label.AutoSize = true;
+            this.email_label.Location = new System.Drawing.Point(51, 124);
+            this.email_label.Name = "email_label";
+            this.email_label.Size = new System.Drawing.Size(32, 13);
+            this.email_label.TabIndex = 3;
+            this.email_label.Text = "Email";
             // 
-            // label5
+            // phone_label
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(51, 160);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(38, 13);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "Phone";
+            this.phone_label.AutoSize = true;
+            this.phone_label.Location = new System.Drawing.Point(51, 160);
+            this.phone_label.Name = "phone_label";
+            this.phone_label.Size = new System.Drawing.Size(38, 13);
+            this.phone_label.TabIndex = 4;
+            this.phone_label.Text = "Phone";
             // 
-            // label6
+            // address_label
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(51, 194);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(45, 13);
-            this.label6.TabIndex = 5;
-            this.label6.Text = "Address";
+            this.address_label.AutoSize = true;
+            this.address_label.Location = new System.Drawing.Point(51, 194);
+            this.address_label.Name = "address_label";
+            this.address_label.Size = new System.Drawing.Size(45, 13);
+            this.address_label.TabIndex = 5;
+            this.address_label.Text = "Address";
             // 
-            // label7
+            // salary_label
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(51, 228);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(36, 13);
-            this.label7.TabIndex = 6;
-            this.label7.Text = "Salary";
+            this.salary_label.AutoSize = true;
+            this.salary_label.Location = new System.Drawing.Point(51, 228);
+            this.salary_label.Name = "salary_label";
+            this.salary_label.Size = new System.Drawing.Size(36, 13);
+            this.salary_label.TabIndex = 6;
+            this.salary_label.Text = "Salary";
             // 
-            // label8
+            // hireDate_label
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(51, 260);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(49, 13);
-            this.label8.TabIndex = 7;
-            this.label8.Text = "HireDate";
+            this.hireDate_label.AutoSize = true;
+            this.hireDate_label.Location = new System.Drawing.Point(51, 260);
+            this.hireDate_label.Name = "hireDate_label";
+            this.hireDate_label.Size = new System.Drawing.Size(49, 13);
+            this.hireDate_label.TabIndex = 7;
+            this.hireDate_label.Text = "HireDate";
             // 
             // nameEmployee
             // 
@@ -194,21 +194,21 @@
             this.idEmployee.TabIndex = 16;
             this.idEmployee.Text = "ID";
             // 
-            // label1
+            // dateFomart
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(458, 260);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(61, 13);
-            this.label1.TabIndex = 19;
-            this.label1.Text = "yyyy-mm-dd";
+            this.dateFomart.AutoSize = true;
+            this.dateFomart.Location = new System.Drawing.Point(458, 260);
+            this.dateFomart.Name = "dateFomart";
+            this.dateFomart.Size = new System.Drawing.Size(61, 13);
+            this.dateFomart.TabIndex = 19;
+            this.dateFomart.Text = "yyyy-mm-dd";
             // 
-            // editEmployeeForm
+            // editForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(572, 372);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.dateFomart);
             this.Controls.Add(this.addBtn);
             this.Controls.Add(this.idEmployee);
             this.Controls.Add(this.saveEmployeeBtn);
@@ -218,16 +218,16 @@
             this.Controls.Add(this.phoneEmployee);
             this.Controls.Add(this.emailEmployee);
             this.Controls.Add(this.nameEmployee);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.hireDate_label);
+            this.Controls.Add(this.salary_label);
+            this.Controls.Add(this.address_label);
+            this.Controls.Add(this.phone_label);
+            this.Controls.Add(this.email_label);
+            this.Controls.Add(this.name_label);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.titleForm);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "editEmployeeForm";
+            this.Name = "editForm";
             this.Text = "Edit Employee Form";
             this.Load += new System.EventHandler(this.editEmployeeForm_Load);
             this.ResumeLayout(false);
@@ -238,12 +238,12 @@
         #endregion
 
         private System.Windows.Forms.Label titleForm;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label name_label;
+        private System.Windows.Forms.Label email_label;
+        private System.Windows.Forms.Label phone_label;
+        private System.Windows.Forms.Label address_label;
+        private System.Windows.Forms.Label salary_label;
+        private System.Windows.Forms.Label hireDate_label;
         private System.Windows.Forms.TextBox nameEmployee;
         private System.Windows.Forms.TextBox emailEmployee;
         private System.Windows.Forms.TextBox phoneEmployee;
@@ -254,6 +254,6 @@
         private System.Windows.Forms.Button addBtn;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label idEmployee;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label dateFomart;
     }
 }

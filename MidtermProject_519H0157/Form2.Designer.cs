@@ -32,10 +32,14 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.addBtn = new System.Windows.Forms.Button();
+            this.addEmployeeBtn = new System.Windows.Forms.Button();
             this.delEmployeeBtn = new System.Windows.Forms.Button();
             this.employeeList = new System.Windows.Forms.ListView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.addClientBtn = new System.Windows.Forms.Button();
+            this.delClientBtn = new System.Windows.Forms.Button();
+            this.clientsList = new System.Windows.Forms.ListView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabPage5 = new System.Windows.Forms.TabPage();
@@ -44,6 +48,8 @@
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.flowLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -81,7 +87,7 @@
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.Controls.Add(this.addBtn);
+            this.flowLayoutPanel1.Controls.Add(this.addEmployeeBtn);
             this.flowLayoutPanel1.Controls.Add(this.delEmployeeBtn);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
@@ -90,17 +96,17 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(716, 37);
             this.flowLayoutPanel1.TabIndex = 3;
             // 
-            // addBtn
+            // addEmployeeBtn
             // 
-            this.addBtn.Font = new System.Drawing.Font("MV Boli", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addBtn.Location = new System.Drawing.Point(621, 3);
-            this.addBtn.Name = "addBtn";
-            this.addBtn.Padding = new System.Windows.Forms.Padding(2);
-            this.addBtn.Size = new System.Drawing.Size(92, 30);
-            this.addBtn.TabIndex = 2;
-            this.addBtn.Text = "Add";
-            this.addBtn.UseVisualStyleBackColor = true;
-            this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
+            this.addEmployeeBtn.Font = new System.Drawing.Font("MV Boli", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addEmployeeBtn.Location = new System.Drawing.Point(621, 3);
+            this.addEmployeeBtn.Name = "addEmployeeBtn";
+            this.addEmployeeBtn.Padding = new System.Windows.Forms.Padding(2);
+            this.addEmployeeBtn.Size = new System.Drawing.Size(92, 30);
+            this.addEmployeeBtn.TabIndex = 2;
+            this.addEmployeeBtn.Text = "Add";
+            this.addEmployeeBtn.UseVisualStyleBackColor = true;
+            this.addEmployeeBtn.Click += new System.EventHandler(this.addEmployeeBtn_Click);
             // 
             // delEmployeeBtn
             // 
@@ -131,12 +137,61 @@
             this.tabPage2.BackColor = System.Drawing.Color.Transparent;
             this.tabPage2.BackgroundImage = global::MidtermProject_519H0157.Properties.Resources.dashboardBg;
             this.tabPage2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.tabPage2.Controls.Add(this.flowLayoutPanel2);
+            this.tabPage2.Controls.Add(this.clientsList);
             this.tabPage2.Location = new System.Drawing.Point(4, 45);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(40, 20, 40, 40);
             this.tabPage2.Size = new System.Drawing.Size(798, 401);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Clients";
+            // 
+            // flowLayoutPanel2
+            // 
+            this.flowLayoutPanel2.Controls.Add(this.addClientBtn);
+            this.flowLayoutPanel2.Controls.Add(this.delClientBtn);
+            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(40, 324);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(718, 37);
+            this.flowLayoutPanel2.TabIndex = 5;
+            // 
+            // addClientBtn
+            // 
+            this.addClientBtn.Font = new System.Drawing.Font("MV Boli", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addClientBtn.Location = new System.Drawing.Point(623, 3);
+            this.addClientBtn.Name = "addClientBtn";
+            this.addClientBtn.Padding = new System.Windows.Forms.Padding(2);
+            this.addClientBtn.Size = new System.Drawing.Size(92, 30);
+            this.addClientBtn.TabIndex = 2;
+            this.addClientBtn.Text = "Add";
+            this.addClientBtn.UseVisualStyleBackColor = true;
+            this.addClientBtn.Click += new System.EventHandler(this.addClientBtn_Click);
+            // 
+            // delClientBtn
+            // 
+            this.delClientBtn.Font = new System.Drawing.Font("MV Boli", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.delClientBtn.Location = new System.Drawing.Point(525, 3);
+            this.delClientBtn.Name = "delClientBtn";
+            this.delClientBtn.Padding = new System.Windows.Forms.Padding(2);
+            this.delClientBtn.Size = new System.Drawing.Size(92, 30);
+            this.delClientBtn.TabIndex = 1;
+            this.delClientBtn.Text = "Delete";
+            this.delClientBtn.UseVisualStyleBackColor = true;
+            this.delClientBtn.Click += new System.EventHandler(this.delClientBtn_Click);
+            // 
+            // clientsList
+            // 
+            this.clientsList.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.clientsList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.clientsList.HideSelection = false;
+            this.clientsList.Location = new System.Drawing.Point(40, 20);
+            this.clientsList.Margin = new System.Windows.Forms.Padding(500, 800, 500, 500);
+            this.clientsList.Name = "clientsList";
+            this.clientsList.Size = new System.Drawing.Size(718, 341);
+            this.clientsList.TabIndex = 4;
+            this.clientsList.UseCompatibleStateImageBehavior = false;
             // 
             // tabPage3
             // 
@@ -213,6 +268,8 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.flowLayoutPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -230,6 +287,10 @@
         private System.Windows.Forms.ListView employeeList;
         private System.Windows.Forms.Button delEmployeeBtn;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Button addBtn;
+        private System.Windows.Forms.Button addEmployeeBtn;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.Button addClientBtn;
+        private System.Windows.Forms.Button delClientBtn;
+        private System.Windows.Forms.ListView clientsList;
     }
 }
