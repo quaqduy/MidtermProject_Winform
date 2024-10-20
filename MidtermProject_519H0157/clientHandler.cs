@@ -33,7 +33,7 @@ namespace MidtermProject_519H0157
 
         public void LoadDataToClientListView()
         {
-            // SQL query to get data from Employee table
+            // SQL query to get data from client table
             string query = "SELECT ID, Name, Email, Phone, Address FROM Client";
 
             // Using the DBconnection class to manage the connection
@@ -72,7 +72,7 @@ namespace MidtermProject_519H0157
             }
         }
 
-        public void delclientEvent()
+        public void delClientEvent()
         {
             // Check to see if any items are selected
             if (clientsList.SelectedItems.Count > 0)
@@ -84,14 +84,14 @@ namespace MidtermProject_519H0157
                 {
                     List<string> clientIdsToDelete = new List<string>();
 
-                    // Browse selected items and save each employee's ID
+                    // Browse selected items and save each client's ID
                     foreach (ListViewItem selectedItem in clientsList.SelectedItems)
                     {
                         string clientId = selectedItem.SubItems[0].Text;
                         clientIdsToDelete.Add(clientId);
                     }
 
-                    // Delete the employees from the database
+                    // Delete the clients from the database
                     DeleteClient(clientIdsToDelete);
 
                     // Remove items from ListView
@@ -109,7 +109,7 @@ namespace MidtermProject_519H0157
             }
         }
 
-        // Method to delete multiple employees using the existing ExecuteQuery method
+        // Method to delete multiple clients using the existing ExecuteQuery method
         private void DeleteClient(List<string> ids)
         {
             // Ensure there are IDs to delete

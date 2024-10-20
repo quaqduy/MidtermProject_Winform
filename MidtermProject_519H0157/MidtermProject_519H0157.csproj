@@ -54,11 +54,11 @@
     </Compile>
     <Compile Include="clientHandler.cs" />
     <Compile Include="DBconnection.cs" />
-    <Compile Include="editEmployeeForm.cs">
+    <Compile Include="editForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="editEmployeeForm.Designer.cs">
-      <DependentUpon>editEmployeeForm.cs</DependentUpon>
+    <Compile Include="editForm.Designer.cs">
+      <DependentUpon>editForm.cs</DependentUpon>
     </Compile>
     <Compile Include="employeeHandler.cs" />
     <Compile Include="Form1.cs">
@@ -78,10 +78,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PiStoreDBDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="productHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="editEmployeeForm.resx">
-      <DependentUpon>editEmployeeForm.cs</DependentUpon>
+    <EmbeddedResource Include="editForm.resx">
+      <DependentUpon>editForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

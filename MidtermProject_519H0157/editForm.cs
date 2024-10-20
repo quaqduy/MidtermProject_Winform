@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Net;
@@ -20,6 +21,10 @@ namespace MidtermProject_519H0157
         public editForm()
         {
             InitializeComponent();
+        }
+        private void editEmployeeForm_Load(object sender, EventArgs e)
+        {
+
         }
 
         public void Show(ListViewItem selectedItem, string type)
@@ -40,6 +45,19 @@ namespace MidtermProject_519H0157
                 typeForm = "client";
 
                 ready_For_addClientForm();
+                label2.Visible = true;
+                idEmployee.Visible = true;
+                saveEmployeeBtn.Visible = true;
+                addBtn.Visible = false;
+                saveEmployeeBtn.Location = new Point(saveEmployeeBtn.Location.X, saveEmployeeBtn.Location.Y - 70);
+                idEmployee.Location = new Point(idEmployee.Location.X, idEmployee.Location.Y - 70);
+                label2.Location = new Point(label2.Location.X, label2.Location.Y - 70);
+            }
+            else if (type == "product")
+            {
+                typeForm = "client";
+
+                ready_For_addProductForm();
                 label2.Visible = true;
                 idEmployee.Visible = true;
                 saveEmployeeBtn.Visible = true;
@@ -76,6 +94,26 @@ namespace MidtermProject_519H0157
             typeForm = "client";
         }
 
+        private void ready_For_addProductForm()
+        {
+            salary_label.Visible = false;
+            hireDate_label.Visible = false;
+            hireDateEmployee.Visible = false;
+            salaryEmployee.Visible = false;
+            dateFomart.Visible = false;
+            addBtn.Location = new Point(addBtn.Location.X, addBtn.Location.Y - 70);
+            label2.Visible = false;
+            idEmployee.Visible = false;
+            saveEmployeeBtn.Visible = false;
+            addBtn.Visible = true;
+            typeForm = "product";
+
+            //moreover
+            email_label.Text = "Description";
+            phone_label.Text = "Price";
+            address_label.Text = "Quantity";
+        }
+
         public void Show(Boolean forAdd, string type) {
             if (forAdd) {
 
@@ -93,15 +131,16 @@ namespace MidtermProject_519H0157
                         ready_For_addClientForm();
                         this.ShowDialog();
                         break;
+                    case "product":
+                        //Ready for addClientForm
+                        titleForm.Text = "Add Form";
+                        ready_For_addProductForm();
+                        this.ShowDialog();
+                        break;
                     default:
                         break;
                 }
             }
-        }
-
-        private void editEmployeeForm_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void saveEmployeeBtn_Click(object sender, EventArgs e)
@@ -120,14 +159,12 @@ namespace MidtermProject_519H0157
                 // If the user selects Yes, perform the update
                 if(typeForm == "employee")
                 {
-                    UpdateEmployee(
+                    UpdateProduct(
                         idEmployee.Text,
                         nameEmployee.Text,
                         emailEmployee.Text,
                         phoneEmployee.Text,
-                        addressEmployee.Text,
-                        salaryEmployee.Text,
-                        hireDateEmployee.Text
+                        addressEmployee.Text
                     );
                 }else if(typeForm == "client")
                 {
@@ -139,7 +176,17 @@ namespace MidtermProject_519H0157
                         addressEmployee.Text
                     );
                 }
-                
+                else if (typeForm == "product")
+                {
+                    UpdateProduct(
+                        idEmployee.Text,
+                        nameEmployee.Text,
+                        emailEmployee.Text,//email field in this situation is description
+                        phoneEmployee.Text,//phone field in this situation is price
+                        addressEmployee.Text//address field in this situation is quantity
+                    );
+                }
+
 
                 // Notify the user that the update was successful
                 // Reload the data into the ListView in the main Form (DashBoard)
@@ -149,6 +196,7 @@ namespace MidtermProject_519H0157
                 {
                     dashBoard.employeeHandler.LoadDataToEmployeeListView(); // Call the method to reload data
                     dashBoard.clientHandler.LoadDataToClientListView(); // Call the method to reload data
+                    dashBoard.productHandler.LoadDataToProductListView(); // Call the method to reload data
                 }
 
                 // Close the edit form after updating
@@ -214,6 +262,31 @@ namespace MidtermProject_519H0157
             }
         }
 
+        private void UpdateProduct(string id, string name, string description, string price, string quantity)
+        {
+            // Connect to the database and perform updates
+            using (SqlConnection conn = new SqlConnection(@"Data Source=QUAQDUY;Initial Catalog=PiStoreDB;Integrated Security=True"))
+            {
+                string query = "UPDATE Product SET " +
+                    "Name = @Name, " +
+                    "Description = @Description, " +
+                    "Price = @Price, " +
+                    "Quantity  = @Quantity " +
+                    "WHERE Id = @Id";
+                using (SqlCommand command = new SqlCommand(query, conn))
+                {
+                    command.Parameters.AddWithValue("@Id", id);
+                    command.Parameters.AddWithValue("@Name", name);
+                    command.Parameters.AddWithValue("@Description", description);
+                    command.Parameters.AddWithValue("@Price", price);
+                    command.Parameters.AddWithValue("@Quantity", quantity);
+
+                    conn.Open();
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
         private void addBtn_Click(object sender, EventArgs e)
         {
             // Get information from input fields
@@ -224,6 +297,11 @@ namespace MidtermProject_519H0157
             string salary = salaryEmployee.Text;
             string hireDateString = hireDateEmployee.Text;
 
+            //For product
+            string description = email;
+            string price = phone;
+            string quantity = address;
+
             // Check if all fields are filled
             if (!AreFieldsValid(name, email, phone, address, salary, hireDateString))
             {
@@ -231,7 +309,7 @@ namespace MidtermProject_519H0157
                 return;
             }
 
-            // Create SQL command to add employee
+            // Create SQL command to add 
             string query = "";
             DateTime hireDate = new DateTime();
 
@@ -251,6 +329,11 @@ namespace MidtermProject_519H0157
                 query = "INSERT INTO Client (Name, Email, Phone, Address) " +
                            "VALUES (@Name, @Email, @Phone, @Address)";
             }
+            else if (typeForm == "product")
+            {
+                query = "INSERT INTO Product (Name, Description, Price, Quantity) " +
+                           "VALUES (@Name, @Description, @Price, @Quantity)";
+            }
 
             // Use DBconnection class to execute the command
             DBconnection db = new DBconnection();
@@ -259,14 +342,19 @@ namespace MidtermProject_519H0157
                 db.OpenConnection();
                 if (typeForm == "employee")
                 {
-                    AddEmployeeToDatabase(db, query, name, email, phone, address, salary, hireDate);
+                    AddToDatabase(db, query, name, email, phone, address, salary, hireDate);
                     MessageBox.Show("Employee added successfully!");
                 }else if(typeForm == "client")
                 {
-                    AddEmployeeToDatabase(db, query, name, email, phone, address, salary, hireDate);
+                    AddToDatabase(db, query, name, email, phone, address, "", hireDate);
                     MessageBox.Show("Client added successfully!");
                 }
-                
+                else if (typeForm == "product")
+                {
+                    AddToDatabase(db, query, name, description, price, quantity, "", hireDate);
+                    MessageBox.Show("Product added successfully!");
+                }
+
             }
             catch (SqlException ex)
             {
@@ -277,6 +365,10 @@ namespace MidtermProject_519H0157
                 else if (typeForm == "client")
                 {
                     MessageBox.Show("Error adding client: " + ex.Message);
+                }
+                else if (typeForm == "Product")
+                {
+                    MessageBox.Show("Error adding product: " + ex.Message);
                 }
             }
             finally
@@ -306,7 +398,7 @@ namespace MidtermProject_519H0157
                        !string.IsNullOrWhiteSpace(salary) &&
                        !string.IsNullOrWhiteSpace(hireDateString);
             }
-            else if (typeForm == "client")
+            else if (typeForm == "client" || typeForm == "product")
             {
                 return !string.IsNullOrWhiteSpace(name) &&
                        !string.IsNullOrWhiteSpace(email) &&
@@ -325,14 +417,23 @@ namespace MidtermProject_519H0157
         }
 
         // Method to add employee to the database
-        private void AddEmployeeToDatabase(DBconnection db, string query, string name, string email, string phone, string address, string salary, DateTime hireDate)
+        private void AddToDatabase(DBconnection db, string query, string name, string email, string phone, string address, string salary, DateTime hireDate)
         {
             using (SqlCommand command = new SqlCommand(query, db.OpenConnection()))
             {
                 command.Parameters.AddWithValue("@Name", name);
-                command.Parameters.AddWithValue("@Email", email);
-                command.Parameters.AddWithValue("@Phone", phone);
-                command.Parameters.AddWithValue("@Address", address);
+                if(typeForm == "employee" || typeForm == "client")
+                {
+                    command.Parameters.AddWithValue("@Email", email);
+                    command.Parameters.AddWithValue("@Phone", phone);
+                    command.Parameters.AddWithValue("@Address", address);
+                }else if(typeForm == "product")
+                {
+                    //@Description, @Price, @Quantity
+                    command.Parameters.AddWithValue("@Description", email);
+                    command.Parameters.AddWithValue("@Price", phone);
+                    command.Parameters.AddWithValue("@Quantity", address);
+                }
                 if (typeForm == "employee")
                 {
                     command.Parameters.AddWithValue("@Salary", salary);
@@ -363,8 +464,8 @@ namespace MidtermProject_519H0157
                 // Call the method to reload data
                 dashBoard.employeeHandler.LoadDataToEmployeeListView(); 
                 dashBoard.clientHandler.LoadDataToClientListView();
+                dashBoard.productHandler.LoadDataToProductListView();
             }
         }
-
     }
 }

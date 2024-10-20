@@ -16,6 +16,7 @@ namespace MidtermProject_519H0157
     {
         public employeeHandler employeeHandler;
         public clientHandler clientHandler;
+        public productHandler productHandler;
 
         public DashBoard()
         {
@@ -35,6 +36,12 @@ namespace MidtermProject_519H0157
             clientHandler.listViewClientCustom();
             clientHandler.LoadDataToClientListView();
             clientsList.DoubleClick += new EventHandler(clientHandler.clientList_DoubleClick);
+
+            //Product view
+            productHandler = new productHandler(productsList);
+            productHandler.listViewProductCustom();
+            productHandler.LoadDataToProductListView();
+            productsList.DoubleClick += new EventHandler(productHandler.productList_DoubleClick);
         }
 
         /*------------------EmployeePage------------------*/
@@ -48,11 +55,30 @@ namespace MidtermProject_519H0157
             openAddForm("emplyee");
         }
 
-        /*----------------------------------------------------------------------------*/
+        /*------------------ClientPage------------------*/
         private void addClientBtn_Click(object sender, EventArgs e)
         {
             openAddForm("client");
         }
+
+        private void delClientBtn_Click(object sender, EventArgs e)
+        {
+            clientHandler.delClientEvent();
+        }
+
+        /*------------------ProductPage------------------*/
+        private void addProductBtn_Click(object sender, EventArgs e)
+        {
+            openAddForm("product");
+        }
+
+        private void delProductBtn_Click(object sender, EventArgs e)
+        {
+            productHandler.delProductEvent();
+
+        }
+
+        /*------------------vvv------------------*/
         private void openAddForm(string type)
         {
             editForm editForm = new editForm();
@@ -65,15 +91,13 @@ namespace MidtermProject_519H0157
                 case "client":
                     editForm.Show(true, "client");
                     break;
+                case "product":
+                    editForm.Show(true, "product");
+                    break;
                 default:
                     break;
             }
         }
-
-        private void delClientBtn_Click(object sender, EventArgs e)
-        {
-            clientHandler.delclientEvent();
-        }
-        /*------------------ClientPage------------------*/
+        /*------------------vvv------------------*/
     }
 }

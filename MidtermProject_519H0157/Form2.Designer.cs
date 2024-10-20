@@ -41,7 +41,10 @@
             this.delClientBtn = new System.Windows.Forms.Button();
             this.clientsList = new System.Windows.Forms.ListView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
+            this.addProductBtn = new System.Windows.Forms.Button();
+            this.delProductBtn = new System.Windows.Forms.Button();
+            this.productsList = new System.Windows.Forms.ListView();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.tabPage7 = new System.Windows.Forms.TabPage();
@@ -50,6 +53,8 @@
             this.flowLayoutPanel1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.flowLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -57,7 +62,6 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Controls.Add(this.tabPage7);
@@ -197,25 +201,62 @@
             // 
             this.tabPage3.BackgroundImage = global::MidtermProject_519H0157.Properties.Resources.dashboardBg;
             this.tabPage3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.tabPage3.Controls.Add(this.flowLayoutPanel3);
+            this.tabPage3.Controls.Add(this.productsList);
             this.tabPage3.Location = new System.Drawing.Point(4, 45);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(40, 20, 40, 40);
             this.tabPage3.Size = new System.Drawing.Size(798, 401);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Products";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // tabPage4
+            // flowLayoutPanel3
             // 
-            this.tabPage4.BackgroundImage = global::MidtermProject_519H0157.Properties.Resources.dashboardBg;
-            this.tabPage4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.tabPage4.Location = new System.Drawing.Point(4, 45);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(798, 401);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Products";
-            this.tabPage4.UseVisualStyleBackColor = true;
+            this.flowLayoutPanel3.Controls.Add(this.addProductBtn);
+            this.flowLayoutPanel3.Controls.Add(this.delProductBtn);
+            this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.flowLayoutPanel3.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(40, 324);
+            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(718, 37);
+            this.flowLayoutPanel3.TabIndex = 7;
+            // 
+            // addProductBtn
+            // 
+            this.addProductBtn.Font = new System.Drawing.Font("MV Boli", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addProductBtn.Location = new System.Drawing.Point(623, 3);
+            this.addProductBtn.Name = "addProductBtn";
+            this.addProductBtn.Padding = new System.Windows.Forms.Padding(2);
+            this.addProductBtn.Size = new System.Drawing.Size(92, 30);
+            this.addProductBtn.TabIndex = 2;
+            this.addProductBtn.Text = "Add";
+            this.addProductBtn.UseVisualStyleBackColor = true;
+            this.addProductBtn.Click += new System.EventHandler(this.addProductBtn_Click);
+            // 
+            // delProductBtn
+            // 
+            this.delProductBtn.Font = new System.Drawing.Font("MV Boli", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.delProductBtn.Location = new System.Drawing.Point(525, 3);
+            this.delProductBtn.Name = "delProductBtn";
+            this.delProductBtn.Padding = new System.Windows.Forms.Padding(2);
+            this.delProductBtn.Size = new System.Drawing.Size(92, 30);
+            this.delProductBtn.TabIndex = 1;
+            this.delProductBtn.Text = "Delete";
+            this.delProductBtn.UseVisualStyleBackColor = true;
+            this.delProductBtn.Click += new System.EventHandler(this.delProductBtn_Click);
+            // 
+            // productsList
+            // 
+            this.productsList.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.productsList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.productsList.HideSelection = false;
+            this.productsList.Location = new System.Drawing.Point(40, 20);
+            this.productsList.Margin = new System.Windows.Forms.Padding(500, 800, 500, 500);
+            this.productsList.Name = "productsList";
+            this.productsList.Size = new System.Drawing.Size(718, 341);
+            this.productsList.TabIndex = 6;
+            this.productsList.UseCompatibleStateImageBehavior = false;
             // 
             // tabPage5
             // 
@@ -270,6 +311,8 @@
             this.flowLayoutPanel1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.flowLayoutPanel2.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            this.flowLayoutPanel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -279,8 +322,6 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.TabPage tabPage6;
         private System.Windows.Forms.TabPage tabPage7;
@@ -292,5 +333,10 @@
         private System.Windows.Forms.Button addClientBtn;
         private System.Windows.Forms.Button delClientBtn;
         private System.Windows.Forms.ListView clientsList;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
+        private System.Windows.Forms.Button addProductBtn;
+        private System.Windows.Forms.Button delProductBtn;
+        private System.Windows.Forms.ListView productsList;
+        public System.Windows.Forms.TabPage tabPage3;
     }
 }
