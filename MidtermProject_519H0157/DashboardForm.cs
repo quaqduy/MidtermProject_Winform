@@ -17,6 +17,7 @@ namespace MidtermProject_519H0157
         public employeeHandler employeeHandler;
         public clientHandler clientHandler;
         public productHandler productHandler;
+        public placeOrderHandler placeOrderHandler;
 
         public DashBoard()
         {
@@ -42,6 +43,12 @@ namespace MidtermProject_519H0157
             productHandler.listViewProductCustom();
             productHandler.LoadDataToProductListView();
             productsList.DoubleClick += new EventHandler(productHandler.productList_DoubleClick);
+
+            //PlaceOrder view
+            placeOrderHandler = new placeOrderHandler(productList_view);
+            placeOrderHandler.listProduct_view_Custom();
+            placeOrderHandler.LoadProductToListView();
+            //productsList.DoubleClick += new EventHandler(productHandler.productList_DoubleClick);
         }
 
         /*------------------EmployeePage------------------*/
