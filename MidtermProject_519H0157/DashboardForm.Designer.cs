@@ -46,24 +46,24 @@
             this.delProductBtn = new System.Windows.Forms.Button();
             this.productsList = new System.Windows.Forms.ListView();
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.tabPage7 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.productList_view = new System.Windows.Forms.ListView();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
+            this.productList_view = new System.Windows.Forms.ListView();
+            this.button2 = new System.Windows.Forms.Button();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -95,8 +95,7 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.BackColor = System.Drawing.Color.Transparent;
-            this.tabPage1.BackgroundImage = global::MidtermProject_519H0157.Properties.Resources.dashboardBg;
+            this.tabPage1.BackColor = System.Drawing.SystemColors.ControlDark;
             this.tabPage1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.tabPage1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tabPage1.Controls.Add(this.flowLayoutPanel1);
@@ -104,7 +103,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 45);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(40, 20, 40, 40);
-            this.tabPage1.Size = new System.Drawing.Size(798, 401);
+            this.tabPage1.Size = new System.Drawing.Size(1065, 574);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Employees";
             // 
@@ -114,33 +113,37 @@
             this.flowLayoutPanel1.Controls.Add(this.delEmployeeBtn);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(40, 322);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(40, 495);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(716, 37);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(983, 37);
             this.flowLayoutPanel1.TabIndex = 3;
             // 
             // addEmployeeBtn
             // 
+            this.addEmployeeBtn.BackColor = System.Drawing.Color.GreenYellow;
             this.addEmployeeBtn.Font = new System.Drawing.Font("MV Boli", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addEmployeeBtn.Location = new System.Drawing.Point(621, 3);
+            this.addEmployeeBtn.ForeColor = System.Drawing.Color.Black;
+            this.addEmployeeBtn.Location = new System.Drawing.Point(888, 3);
             this.addEmployeeBtn.Name = "addEmployeeBtn";
             this.addEmployeeBtn.Padding = new System.Windows.Forms.Padding(2);
             this.addEmployeeBtn.Size = new System.Drawing.Size(92, 30);
             this.addEmployeeBtn.TabIndex = 2;
             this.addEmployeeBtn.Text = "Add";
-            this.addEmployeeBtn.UseVisualStyleBackColor = true;
+            this.addEmployeeBtn.UseVisualStyleBackColor = false;
             this.addEmployeeBtn.Click += new System.EventHandler(this.addEmployeeBtn_Click);
             // 
             // delEmployeeBtn
             // 
+            this.delEmployeeBtn.BackColor = System.Drawing.Color.Red;
             this.delEmployeeBtn.Font = new System.Drawing.Font("MV Boli", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.delEmployeeBtn.Location = new System.Drawing.Point(523, 3);
+            this.delEmployeeBtn.ForeColor = System.Drawing.Color.White;
+            this.delEmployeeBtn.Location = new System.Drawing.Point(790, 3);
             this.delEmployeeBtn.Name = "delEmployeeBtn";
             this.delEmployeeBtn.Padding = new System.Windows.Forms.Padding(2);
             this.delEmployeeBtn.Size = new System.Drawing.Size(92, 30);
             this.delEmployeeBtn.TabIndex = 1;
             this.delEmployeeBtn.Text = "Delete";
-            this.delEmployeeBtn.UseVisualStyleBackColor = true;
+            this.delEmployeeBtn.UseVisualStyleBackColor = false;
             this.delEmployeeBtn.Click += new System.EventHandler(this.delEmployeeBtn_Click);
             // 
             // employeeList
@@ -151,21 +154,20 @@
             this.employeeList.Location = new System.Drawing.Point(40, 20);
             this.employeeList.Margin = new System.Windows.Forms.Padding(500, 800, 500, 500);
             this.employeeList.Name = "employeeList";
-            this.employeeList.Size = new System.Drawing.Size(716, 339);
+            this.employeeList.Size = new System.Drawing.Size(983, 512);
             this.employeeList.TabIndex = 2;
             this.employeeList.UseCompatibleStateImageBehavior = false;
             // 
             // tabPage2
             // 
-            this.tabPage2.BackColor = System.Drawing.Color.Transparent;
-            this.tabPage2.BackgroundImage = global::MidtermProject_519H0157.Properties.Resources.dashboardBg;
+            this.tabPage2.BackColor = System.Drawing.SystemColors.ControlDark;
             this.tabPage2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.tabPage2.Controls.Add(this.flowLayoutPanel2);
             this.tabPage2.Controls.Add(this.clientsList);
             this.tabPage2.Location = new System.Drawing.Point(4, 45);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(40, 20, 40, 40);
-            this.tabPage2.Size = new System.Drawing.Size(798, 401);
+            this.tabPage2.Size = new System.Drawing.Size(1065, 574);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Clients";
             // 
@@ -175,33 +177,36 @@
             this.flowLayoutPanel2.Controls.Add(this.delClientBtn);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(40, 324);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(40, 497);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(718, 37);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(985, 37);
             this.flowLayoutPanel2.TabIndex = 5;
             // 
             // addClientBtn
             // 
+            this.addClientBtn.BackColor = System.Drawing.Color.GreenYellow;
             this.addClientBtn.Font = new System.Drawing.Font("MV Boli", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addClientBtn.Location = new System.Drawing.Point(623, 3);
+            this.addClientBtn.Location = new System.Drawing.Point(890, 3);
             this.addClientBtn.Name = "addClientBtn";
             this.addClientBtn.Padding = new System.Windows.Forms.Padding(2);
             this.addClientBtn.Size = new System.Drawing.Size(92, 30);
             this.addClientBtn.TabIndex = 2;
             this.addClientBtn.Text = "Add";
-            this.addClientBtn.UseVisualStyleBackColor = true;
+            this.addClientBtn.UseVisualStyleBackColor = false;
             this.addClientBtn.Click += new System.EventHandler(this.addClientBtn_Click);
             // 
             // delClientBtn
             // 
+            this.delClientBtn.BackColor = System.Drawing.Color.Red;
             this.delClientBtn.Font = new System.Drawing.Font("MV Boli", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.delClientBtn.Location = new System.Drawing.Point(525, 3);
+            this.delClientBtn.ForeColor = System.Drawing.Color.White;
+            this.delClientBtn.Location = new System.Drawing.Point(792, 3);
             this.delClientBtn.Name = "delClientBtn";
             this.delClientBtn.Padding = new System.Windows.Forms.Padding(2);
             this.delClientBtn.Size = new System.Drawing.Size(92, 30);
             this.delClientBtn.TabIndex = 1;
             this.delClientBtn.Text = "Delete";
-            this.delClientBtn.UseVisualStyleBackColor = true;
+            this.delClientBtn.UseVisualStyleBackColor = false;
             this.delClientBtn.Click += new System.EventHandler(this.delClientBtn_Click);
             // 
             // clientsList
@@ -212,23 +217,22 @@
             this.clientsList.Location = new System.Drawing.Point(40, 20);
             this.clientsList.Margin = new System.Windows.Forms.Padding(500, 800, 500, 500);
             this.clientsList.Name = "clientsList";
-            this.clientsList.Size = new System.Drawing.Size(718, 341);
+            this.clientsList.Size = new System.Drawing.Size(985, 514);
             this.clientsList.TabIndex = 4;
             this.clientsList.UseCompatibleStateImageBehavior = false;
             // 
             // tabPage3
             // 
-            this.tabPage3.BackgroundImage = global::MidtermProject_519H0157.Properties.Resources.dashboardBg;
+            this.tabPage3.BackColor = System.Drawing.SystemColors.ControlDark;
             this.tabPage3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.tabPage3.Controls.Add(this.flowLayoutPanel3);
             this.tabPage3.Controls.Add(this.productsList);
             this.tabPage3.Location = new System.Drawing.Point(4, 45);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(40, 20, 40, 40);
-            this.tabPage3.Size = new System.Drawing.Size(798, 401);
+            this.tabPage3.Size = new System.Drawing.Size(1065, 574);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Products";
-            this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // flowLayoutPanel3
             // 
@@ -236,33 +240,36 @@
             this.flowLayoutPanel3.Controls.Add(this.delProductBtn);
             this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel3.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(40, 324);
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(40, 497);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(718, 37);
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(985, 37);
             this.flowLayoutPanel3.TabIndex = 7;
             // 
             // addProductBtn
             // 
+            this.addProductBtn.BackColor = System.Drawing.Color.GreenYellow;
             this.addProductBtn.Font = new System.Drawing.Font("MV Boli", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addProductBtn.Location = new System.Drawing.Point(623, 3);
+            this.addProductBtn.Location = new System.Drawing.Point(890, 3);
             this.addProductBtn.Name = "addProductBtn";
             this.addProductBtn.Padding = new System.Windows.Forms.Padding(2);
             this.addProductBtn.Size = new System.Drawing.Size(92, 30);
             this.addProductBtn.TabIndex = 2;
             this.addProductBtn.Text = "Add";
-            this.addProductBtn.UseVisualStyleBackColor = true;
+            this.addProductBtn.UseVisualStyleBackColor = false;
             this.addProductBtn.Click += new System.EventHandler(this.addProductBtn_Click);
             // 
             // delProductBtn
             // 
+            this.delProductBtn.BackColor = System.Drawing.Color.Red;
             this.delProductBtn.Font = new System.Drawing.Font("MV Boli", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.delProductBtn.Location = new System.Drawing.Point(525, 3);
+            this.delProductBtn.ForeColor = System.Drawing.Color.White;
+            this.delProductBtn.Location = new System.Drawing.Point(792, 3);
             this.delProductBtn.Name = "delProductBtn";
             this.delProductBtn.Padding = new System.Windows.Forms.Padding(2);
             this.delProductBtn.Size = new System.Drawing.Size(92, 30);
             this.delProductBtn.TabIndex = 1;
             this.delProductBtn.Text = "Delete";
-            this.delProductBtn.UseVisualStyleBackColor = true;
+            this.delProductBtn.UseVisualStyleBackColor = false;
             this.delProductBtn.Click += new System.EventHandler(this.delProductBtn_Click);
             // 
             // productsList
@@ -273,13 +280,13 @@
             this.productsList.Location = new System.Drawing.Point(40, 20);
             this.productsList.Margin = new System.Windows.Forms.Padding(500, 800, 500, 500);
             this.productsList.Name = "productsList";
-            this.productsList.Size = new System.Drawing.Size(718, 341);
+            this.productsList.Size = new System.Drawing.Size(985, 514);
             this.productsList.TabIndex = 6;
             this.productsList.UseCompatibleStateImageBehavior = false;
             // 
             // tabPage5
             // 
-            this.tabPage5.BackgroundImage = global::MidtermProject_519H0157.Properties.Resources.dashboardBg;
+            this.tabPage5.BackColor = System.Drawing.SystemColors.ControlDark;
             this.tabPage5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.tabPage5.Controls.Add(this.tableLayoutPanel1);
             this.tabPage5.Location = new System.Drawing.Point(4, 45);
@@ -289,30 +296,6 @@
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Place Order";
             this.tabPage5.UseVisualStyleBackColor = true;
-            // 
-            // tabPage6
-            // 
-            this.tabPage6.BackgroundImage = global::MidtermProject_519H0157.Properties.Resources.dashboardBg;
-            this.tabPage6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.tabPage6.Location = new System.Drawing.Point(4, 45);
-            this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(798, 401);
-            this.tabPage6.TabIndex = 5;
-            this.tabPage6.Text = "Manage Orders";
-            this.tabPage6.UseVisualStyleBackColor = true;
-            // 
-            // tabPage7
-            // 
-            this.tabPage7.BackgroundImage = global::MidtermProject_519H0157.Properties.Resources.dashboardBg;
-            this.tabPage7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.tabPage7.Location = new System.Drawing.Point(4, 45);
-            this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(798, 401);
-            this.tabPage7.TabIndex = 6;
-            this.tabPage7.Text = "Generate Bill";
-            this.tabPage7.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel1
             // 
@@ -331,72 +314,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1059, 568);
             this.tableLayoutPanel1.TabIndex = 0;
-            // 
-            // productList_view
-            // 
-            this.productList_view.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.productList_view.HideSelection = false;
-            this.productList_view.Location = new System.Drawing.Point(3, 3);
-            this.productList_view.Name = "productList_view";
-            this.productList_view.Size = new System.Drawing.Size(682, 502);
-            this.productList_view.TabIndex = 0;
-            this.productList_view.UseCompatibleStateImageBehavior = false;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label5.Location = new System.Drawing.Point(3, 180);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(198, 40);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "Total Prire";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label4.Location = new System.Drawing.Point(3, 140);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(198, 40);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Order Date";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label3.Location = new System.Drawing.Point(3, 100);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(198, 40);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Client ID";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Location = new System.Drawing.Point(3, 60);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(198, 40);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Employee ID";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Font = new System.Drawing.Font("MV Boli", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(3, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(198, 60);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Place Order";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tableLayoutPanel2
             // 
@@ -429,6 +346,62 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(313, 502);
             this.tableLayoutPanel2.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.Font = new System.Drawing.Font("MV Boli", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(3, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(198, 60);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Place Order";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label2.Location = new System.Drawing.Point(3, 60);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(198, 40);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Employee ID";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label3.Location = new System.Drawing.Point(3, 100);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(198, 40);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Client ID";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label4.Location = new System.Drawing.Point(3, 140);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(198, 40);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "Order Date";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label5.Location = new System.Drawing.Point(3, 180);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(198, 40);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "Total Prire";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // textBox1
             // 
@@ -474,33 +447,68 @@
             // 
             // button1
             // 
+            this.button1.BackColor = System.Drawing.Color.YellowGreen;
             this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button1.ForeColor = System.Drawing.Color.Black;
             this.button1.Location = new System.Drawing.Point(207, 473);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(120, 34);
             this.button1.TabIndex = 11;
             this.button1.Text = "Save";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
+            // 
+            // listView1
+            // 
+            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView1.HideSelection = false;
+            this.listView1.Location = new System.Drawing.Point(207, 223);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(120, 244);
+            this.listView1.TabIndex = 12;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            // 
+            // productList_view
+            // 
+            this.productList_view.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.productList_view.HideSelection = false;
+            this.productList_view.Location = new System.Drawing.Point(3, 3);
+            this.productList_view.Name = "productList_view";
+            this.productList_view.Size = new System.Drawing.Size(682, 502);
+            this.productList_view.TabIndex = 0;
+            this.productList_view.UseCompatibleStateImageBehavior = false;
             // 
             // button2
             // 
+            this.button2.BackColor = System.Drawing.Color.GreenYellow;
             this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button2.Location = new System.Drawing.Point(3, 511);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(682, 54);
             this.button2.TabIndex = 2;
             this.button2.Text = "Add";
-            this.button2.UseVisualStyleBackColor = true;
+            this.button2.UseVisualStyleBackColor = false;
             // 
-            // listView1
+            // tabPage6
             // 
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(222, 271);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(79, 114);
-            this.listView1.TabIndex = 12;
-            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.tabPage6.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.tabPage6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.tabPage6.Location = new System.Drawing.Point(4, 45);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage6.Size = new System.Drawing.Size(1065, 574);
+            this.tabPage6.TabIndex = 5;
+            this.tabPage6.Text = "Manage Orders";
+            // 
+            // tabPage7
+            // 
+            this.tabPage7.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.tabPage7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.tabPage7.Location = new System.Drawing.Point(4, 45);
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage7.Size = new System.Drawing.Size(1065, 574);
+            this.tabPage7.TabIndex = 6;
+            this.tabPage7.Text = "Generate Bill";
             // 
             // DashBoard
             // 
