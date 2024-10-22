@@ -73,6 +73,7 @@
     <Compile Include="DashboardForm.Designer.cs">
       <DependentUpon>DashboardForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="orderInfHandler.cs" />
     <Compile Include="PiStoreDBDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -129,13 +130,8 @@
     <None Include="imgs\loginBg.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="imgs\dashboardBg.png" />
+    <Content Include="imgs\productImgs\productItem.jpg" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="imgs\clientBG.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="imgs\productItem.png" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

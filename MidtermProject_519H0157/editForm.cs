@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Reflection.Emit;
@@ -12,6 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
 
 namespace MidtermProject_519H0157
 {
@@ -34,13 +36,14 @@ namespace MidtermProject_519H0157
             emailEmployee.Text = selectedItem.SubItems[2].Text;
             phoneEmployee.Text = selectedItem.SubItems[3].Text;
             addressEmployee.Text = selectedItem.SubItems[4].Text;
-            if(type == "employee")
+            if (type == "employee")
             {
                 typeForm = "employee";
 
                 salaryEmployee.Text = selectedItem.SubItems[5].Text;
                 hireDateEmployee.Text = selectedItem.SubItems[6].Text;
-            }else if (type == "client")
+            }
+            else if (type == "client")
             {
                 typeForm = "client";
 
@@ -55,7 +58,7 @@ namespace MidtermProject_519H0157
             }
             else if (type == "product")
             {
-                typeForm = "client";
+                typeForm = "product";
 
                 ready_For_addProductForm();
                 label2.Visible = true;
@@ -106,6 +109,13 @@ namespace MidtermProject_519H0157
             idEmployee.Visible = false;
             saveEmployeeBtn.Visible = false;
             addBtn.Visible = true;
+
+            uploadProductImg.Location = new Point(uploadProductImg.Location.X, uploadProductImg.Location.Y - 70);
+            productImg_lable.Location = new Point(productImg_lable.Location.X, productImg_lable.Location.Y - 70);
+
+            productImg_lable.Visible = true;
+            uploadProductImg.Visible = true;
+
             typeForm = "product";
 
             //moreover
@@ -114,10 +124,12 @@ namespace MidtermProject_519H0157
             address_label.Text = "Quantity";
         }
 
-        public void Show(Boolean forAdd, string type) {
-            if (forAdd) {
+        public void Show(Boolean forAdd, string type)
+        {
+            if (forAdd)
+            {
 
-                switch(type)
+                switch (type)
                 {
                     case "employee":
                         //Ready for addEmployeeForm
@@ -143,11 +155,11 @@ namespace MidtermProject_519H0157
             }
         }
 
-        private void saveEmployeeBtn_Click(object sender, EventArgs e)
+        private async void saveEmployeeBtn_Click(object sender, EventArgs e)
         {
             // Displays the confirmation dialog
             DialogResult dialogResult = MessageBox.Show(
-                "Are you sure you want to update the "+this.typeForm+" information?",
+                "Are you sure you want to update the " + this.typeForm + " information?",
                 "Confirm Update",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question
@@ -157,16 +169,19 @@ namespace MidtermProject_519H0157
             if (dialogResult == DialogResult.Yes)
             {
                 // If the user selects Yes, perform the update
-                if(typeForm == "employee")
+                if (typeForm == "employee")
                 {
-                    UpdateProduct(
+                    UpdateEmployee(
                         idEmployee.Text,
                         nameEmployee.Text,
                         emailEmployee.Text,
                         phoneEmployee.Text,
-                        addressEmployee.Text
+                        addressEmployee.Text,
+                        salaryEmployee.Text,
+                        hireDateEmployee.Text
                     );
-                }else if(typeForm == "client")
+                }
+                else if (typeForm == "client")
                 {
                     UpdateClient(
                         idEmployee.Text,
@@ -178,7 +193,7 @@ namespace MidtermProject_519H0157
                 }
                 else if (typeForm == "product")
                 {
-                    UpdateProduct(
+                    await UpdateProductAsync(
                         idEmployee.Text,
                         nameEmployee.Text,
                         emailEmployee.Text,//email field in this situation is description
@@ -190,14 +205,7 @@ namespace MidtermProject_519H0157
 
                 // Notify the user that the update was successful
                 // Reload the data into the ListView in the main Form (DashBoard)
-                DashBoard dashBoard = (DashBoard)Application.OpenForms["DashBoard"]; // Get instance of DashBoard
-
-                if (dashBoard != null)
-                {
-                    dashBoard.employeeHandler.LoadDataToEmployeeListView(); // Call the method to reload data
-                    dashBoard.clientHandler.LoadDataToClientListView(); // Call the method to reload data
-                    dashBoard.productHandler.LoadDataToProductListView(); // Call the method to reload data
-                }
+                ReloadDashBoard();
 
                 // Close the edit form after updating
                 this.Close();
@@ -262,17 +270,17 @@ namespace MidtermProject_519H0157
             }
         }
 
-        private void UpdateProduct(string id, string name, string description, string price, string quantity)
+        private async Task UpdateProductAsync(string id, string name, string description, string price, string quantity)
         {
-            // Connect to the database and perform updates
             using (SqlConnection conn = new SqlConnection(@"Data Source=QUAQDUY;Initial Catalog=PiStoreDB;Integrated Security=True"))
             {
                 string query = "UPDATE Product SET " +
                     "Name = @Name, " +
                     "Description = @Description, " +
                     "Price = @Price, " +
-                    "Quantity  = @Quantity " +
+                    "Quantity = @Quantity " +
                     "WHERE Id = @Id";
+
                 using (SqlCommand command = new SqlCommand(query, conn))
                 {
                     command.Parameters.AddWithValue("@Id", id);
@@ -282,10 +290,53 @@ namespace MidtermProject_519H0157
                     command.Parameters.AddWithValue("@Quantity", quantity);
 
                     conn.Open();
-                    command.ExecuteNonQuery();
+                    await command.ExecuteNonQueryAsync(); // Use async version for the command
+
+                    DashBoard dashBoard = (DashBoard)Application.OpenForms["DashBoard"]; // Get instance of DashBoard
+                    if (dashBoard != null)
+                    {
+                        string sourceFilePath = dashBoard.productHandler.sourceFilePath;
+                        string targetDirectory = dashBoard.productHandler.targetDirectory;
+
+                        if (!string.IsNullOrEmpty(sourceFilePath) && !string.IsNullOrEmpty(targetDirectory))
+                        {
+                            try
+                            {
+                                // Clear old items in the ListView (if this is needed)
+                                dashBoard.placeOrderHandler.productList_view.Items.Clear();
+
+                                // Combine the path for the target file
+                                string targetFilePath = Path.Combine(targetDirectory, id + Path.GetExtension(sourceFilePath));
+
+                                // Copy the file to the target directory asynchronously
+                                await CopyFileAsync(sourceFilePath, targetFilePath);
+                            }
+                            catch (IOException ioEx) // Specific exception for I/O operations
+                            {
+                                MessageBox.Show("I/O error: " + ioEx.Message);
+                            }
+                            catch (Exception ex) // General exception handling
+                            {
+                                MessageBox.Show("An error occurred: " + ex.Message);
+                            }
+                        }
+                    }
                 }
             }
         }
+
+
+        private async Task CopyFileAsync(string sourceFilePath, string targetFilePath)
+        {
+            using (FileStream sourceStream = new FileStream(sourceFilePath, FileMode.Open, FileAccess.Read))
+            {
+                using (FileStream targetStream = new FileStream(targetFilePath, FileMode.Create, FileAccess.Write))
+                {
+                    await sourceStream.CopyToAsync(targetStream); // Sử dụng phương thức CopyToAsync
+                }
+            }
+        }
+
 
         private void addBtn_Click(object sender, EventArgs e)
         {
@@ -324,7 +375,8 @@ namespace MidtermProject_519H0157
 
                 query = "INSERT INTO Employee (Name, Email, Phone, Address, Salary, HireDate) " +
                            "VALUES (@Name, @Email, @Phone, @Address, @Salary, @HireDate)";
-            }else if (typeForm == "client")
+            }
+            else if (typeForm == "client")
             {
                 query = "INSERT INTO Client (Name, Email, Phone, Address) " +
                            "VALUES (@Name, @Email, @Phone, @Address)";
@@ -344,7 +396,8 @@ namespace MidtermProject_519H0157
                 {
                     AddToDatabase(db, query, name, email, phone, address, salary, hireDate);
                     MessageBox.Show("Employee added successfully!");
-                }else if(typeForm == "client")
+                }
+                else if (typeForm == "client")
                 {
                     AddToDatabase(db, query, name, email, phone, address, "", hireDate);
                     MessageBox.Show("Client added successfully!");
@@ -381,7 +434,6 @@ namespace MidtermProject_519H0157
 
             // Notify the user that the update was successful
             ReloadDashBoard();
-
             // Close the edit form after updating
             this.Close();
         }
@@ -422,25 +474,54 @@ namespace MidtermProject_519H0157
             using (SqlCommand command = new SqlCommand(query, db.OpenConnection()))
             {
                 command.Parameters.AddWithValue("@Name", name);
-                if(typeForm == "employee" || typeForm == "client")
+                if (typeForm == "employee" || typeForm == "client")
                 {
                     command.Parameters.AddWithValue("@Email", email);
                     command.Parameters.AddWithValue("@Phone", phone);
                     command.Parameters.AddWithValue("@Address", address);
-                }else if(typeForm == "product")
+                }
+                else if (typeForm == "product")
                 {
                     //@Description, @Price, @Quantity
                     command.Parameters.AddWithValue("@Description", email);
                     command.Parameters.AddWithValue("@Price", phone);
                     command.Parameters.AddWithValue("@Quantity", address);
+                    copyImg();
                 }
                 if (typeForm == "employee")
                 {
                     command.Parameters.AddWithValue("@Salary", salary);
                     command.Parameters.AddWithValue("@HireDate", hireDate);
                 }
-                
                 command.ExecuteNonQuery();
+            }
+        }
+
+        public void copyImg()
+        {
+
+            DashBoard dashBoard = (DashBoard)Application.OpenForms["DashBoard"]; // Get instance of DashBoard
+            if (dashBoard != null)
+            {
+                // Call the method to reload data
+                string sourceFilePath = dashBoard.productHandler.sourceFilePath;
+                string targetDirectory = dashBoard.productHandler.targetDirectory;
+                if (sourceFilePath != null && targetDirectory != null)
+                {
+                    try
+                    {
+                        // Copy the file to the target directory
+                        string targetFilePath = Path.Combine(targetDirectory, $"{dashBoard.placeOrderHandler.maxCurrentIDPro}" + Path.GetExtension(sourceFilePath)); // Combine the path for the target file
+                        File.Copy(sourceFilePath, targetFilePath, true); // 'true' to overwrite if the file already exists
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+
+                }
+
+                dashBoard.placeOrderHandler.LoadProductToListView();
             }
         }
 
@@ -461,10 +542,19 @@ namespace MidtermProject_519H0157
             DashBoard dashBoard = (DashBoard)Application.OpenForms["DashBoard"]; // Get instance of DashBoard
             if (dashBoard != null)
             {
-                // Call the method to reload data
-                dashBoard.employeeHandler.LoadDataToEmployeeListView(); 
+                dashBoard.employeeHandler.LoadDataToEmployeeListView();
                 dashBoard.clientHandler.LoadDataToClientListView();
                 dashBoard.productHandler.LoadDataToProductListView();
+                dashBoard.placeOrderHandler.LoadProductToListView();
+            }
+        }
+
+        private void uploadProductImg_Click(object sender, EventArgs e)
+        {
+            DashBoard dashBoard = (DashBoard)Application.OpenForms["DashBoard"]; // Get instance of DashBoard
+            if (dashBoard != null)
+            {
+                dashBoard.productHandler.uploadImg();
             }
         }
     }

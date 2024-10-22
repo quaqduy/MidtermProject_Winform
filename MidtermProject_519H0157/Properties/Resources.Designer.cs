@@ -63,16 +63,6 @@ namespace MidtermProject_519H0157.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap dashboardBg {
-            get {
-                object obj = ResourceManager.GetObject("dashboardBg", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap loginBg {
             get {
                 object obj = ResourceManager.GetObject("loginBg", resourceCulture);

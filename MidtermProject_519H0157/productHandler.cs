@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,11 @@ namespace MidtermProject_519H0157
 {
     public class productHandler
     {
-        private ListView productsList;
+        public ListView productsList;
+        public string sourceFilePath;
+        public string targetDirectory;
+        public string idForNewProduct;
+
         public productHandler(ListView productsList)
         {
             this.productsList = productsList;
@@ -113,22 +118,31 @@ namespace MidtermProject_519H0157
 
                 if (dialogResult == DialogResult.Yes)
                 {
-                    List<string> clientIdsToDelete = new List<string>();
+                    List<string> productIdsToDelete = new List<string>();
 
                     // Browse selected items and save each product's ID
                     foreach (ListViewItem selectedItem in productsList.SelectedItems)
                     {
                         string clientId = selectedItem.SubItems[0].Text;
-                        clientIdsToDelete.Add(clientId);
+                        productIdsToDelete.Add(clientId);
                     }
 
                     // Delete the products from the database
-                    DeleteClient(clientIdsToDelete);
+                    DeleteProduct(productIdsToDelete);
 
                     // Remove items from ListView
                     foreach (ListViewItem selectedItem in productsList.SelectedItems)
                     {
                         productsList.Items.Remove(selectedItem);
+                    }
+
+                    this.LoadDataToProductListView();
+                    DashBoard dashBoard = (DashBoard)Application.OpenForms["DashBoard"]; // Get instance of DashBoard
+                    if (dashBoard != null)
+                    {
+                        // Call the method to reload data
+                        this.LoadDataToProductListView();
+                        dashBoard.placeOrderHandler.LoadProductToListView();
                     }
 
                     MessageBox.Show("Selected products have been deleted.");
@@ -141,7 +155,7 @@ namespace MidtermProject_519H0157
         }
 
         // Method to delete multiple products using the existing ExecuteQuery method
-        private void DeleteClient(List<string> ids)
+        private void DeleteProduct(List<string> ids)
         {
             // Ensure there are IDs to delete
             if (ids == null || ids.Count == 0)
@@ -172,6 +186,28 @@ namespace MidtermProject_519H0157
                 // Handle any SQL exceptions
                 Console.WriteLine("Error while deleting products: " + ex.Message);
                 MessageBox.Show("Error while deleting products: " + ex.Message);
+            }
+        }
+
+        public void uploadImg()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif"; // Filter to allow only image files
+            openFileDialog.Title = "Select an Image File"; // Title of the dialog
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                this.sourceFilePath = openFileDialog.FileName; // Get the selected file's path
+                string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+                string projectRoot = Path.Combine(baseDirectory, "..\\..\\");
+                string imagePath = Path.Combine(projectRoot, "imgs", "productImgs");
+                this.targetDirectory = Path.Combine(imagePath); // Define the target directory
+
+                // Create the directory if it does not exist
+                if (!Directory.Exists(targetDirectory))
+                {
+                    Directory.CreateDirectory(targetDirectory);
+                }
             }
         }
     }

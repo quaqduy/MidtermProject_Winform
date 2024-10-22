@@ -47,6 +47,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.idEmployee = new System.Windows.Forms.Label();
             this.dateFomart = new System.Windows.Forms.Label();
+            this.productImg_lable = new System.Windows.Forms.Label();
+            this.uploadProductImg = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // titleForm
@@ -203,11 +205,34 @@
             this.dateFomart.TabIndex = 19;
             this.dateFomart.Text = "yyyy-mm-dd";
             // 
+            // productImg_lable
+            // 
+            this.productImg_lable.AutoSize = true;
+            this.productImg_lable.Location = new System.Drawing.Point(51, 305);
+            this.productImg_lable.Name = "productImg_lable";
+            this.productImg_lable.Size = new System.Drawing.Size(40, 13);
+            this.productImg_lable.TabIndex = 20;
+            this.productImg_lable.Text = "Picture";
+            this.productImg_lable.Visible = false;
+            // 
+            // uploadProductImg
+            // 
+            this.uploadProductImg.Location = new System.Drawing.Point(118, 300);
+            this.uploadProductImg.Name = "uploadProductImg";
+            this.uploadProductImg.Size = new System.Drawing.Size(75, 23);
+            this.uploadProductImg.TabIndex = 21;
+            this.uploadProductImg.Text = "Browse";
+            this.uploadProductImg.UseVisualStyleBackColor = true;
+            this.uploadProductImg.Visible = false;
+            this.uploadProductImg.Click += new System.EventHandler(this.uploadProductImg_Click);
+            // 
             // editForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(572, 372);
+            this.Controls.Add(this.uploadProductImg);
+            this.Controls.Add(this.productImg_lable);
             this.Controls.Add(this.dateFomart);
             this.Controls.Add(this.addBtn);
             this.Controls.Add(this.idEmployee);
@@ -255,5 +280,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label idEmployee;
         private System.Windows.Forms.Label dateFomart;
+        private System.Windows.Forms.Label productImg_lable;
+        private System.Windows.Forms.Button uploadProductImg;
     }
 }

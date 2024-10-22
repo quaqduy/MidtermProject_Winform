@@ -18,6 +18,7 @@ namespace MidtermProject_519H0157
         public clientHandler clientHandler;
         public productHandler productHandler;
         public placeOrderHandler placeOrderHandler;
+        public orderInfHandler orderInfHandler;
 
         public DashBoard()
         {
@@ -48,7 +49,18 @@ namespace MidtermProject_519H0157
             placeOrderHandler = new placeOrderHandler(productList_view);
             placeOrderHandler.listProduct_view_Custom();
             placeOrderHandler.LoadProductToListView();
-            //productsList.DoubleClick += new EventHandler(productHandler.productList_DoubleClick);
+            productList_view.DoubleClick += placeOrderHandler.productList_DoubleClick;
+
+            placeOrderHandler.ProductId_selected = productId_selected;
+            placeOrderHandler.ProductName_selected = productName_selected;
+            placeOrderHandler.Quantity_order = quantity_order;
+
+            orderInfHandler = new orderInfHandler(comboBox_employeeId, comboBox_clientId);
+            orderInfHandler.dropDataToEmployeeIDComboBox();
+            orderInfHandler.dropDataToClientIDComboBox();
+            comboBox_employeeId.TextChanged += orderInfHandler.comboBox_employeeId_TextChanged;
+            comboBox_clientId.TextChanged += orderInfHandler.comboBox_clientId_TextChanged;
+            orderInfHandler.generalCurrentDate(orderDate);
         }
 
         /*------------------EmployeePage------------------*/
