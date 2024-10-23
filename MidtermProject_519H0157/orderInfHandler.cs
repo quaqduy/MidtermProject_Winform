@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -162,6 +163,114 @@ namespace MidtermProject_519H0157
         public void generalCurrentDate(Label orderDate)
         {
             orderDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
+        }
+
+        public void updateQuantityProduct(ListView productList_order, List<string> quantityForModifyDB)
+        {
+            // Iterate through each item in the ListView
+            var count = 0;
+            foreach (ListViewItem item in productList_order.Items)
+            {
+                // Assuming the product ID is in the first subitem (index 0)
+                string productId = item.Text; // or item.SubItems[0].Text for the ID in a subitem
+                string quantityOrder = item.SubItems[3].Text;
+
+                var newQuantity = int.Parse(quantityForModifyDB[count]) - int.Parse(quantityOrder);
+
+                DBconnection dbconnection = new DBconnection();
+                dbconnection.OpenConnection();
+
+                var query = "UPDATE Product SET Quantity = "+ newQuantity + " WHERE ID = "+ productId;
+                dbconnection.ExecuteQuery(query);
+
+                dbconnection.CloseConnection();
+                count++;
+            }
+
+            ReloadDashBoard();
+        }
+        //public void createOrder(string ClientID, string EmployeeID, string OrderDate, string TotalPrice)
+        //{
+        //    try
+        //    {
+        //        DBconnection dbconnection = new DBconnection();
+        //        var TotalPriceConvert = ConvertVNDToDecimal(TotalPrice);
+        //        var EmployeeIDConvert = int.Parse(EmployeeID.Split(new string[] { " ; " }, StringSplitOptions.None)[0]);
+        //        var ClientIDConvert = int.Parse(ClientID.Split(new string[] { " ; " }, StringSplitOptions.None)[0]);
+        //        var query = "INSERT INTO [Order] (ClientID, EmployeeID, OrderDate, TotalPrice) " +
+        //               "VALUES (" + ClientIDConvert + ", " + EmployeeIDConvert + ", " + OrderDate + ", " + TotalPriceConvert + ")";
+        //        MessageBox.Show(query);
+        //        dbconnection.ExecuteQuery(query);
+        //    }
+        //    catch (SqlException ex)
+        //    {
+        //        MessageBox.Show(ex.Message);
+        //    }
+        //}
+
+        public void createOrder(string EmployeeID, string ClientID , string OrderDate, string TotalPrice)
+        {
+            try
+            {
+                DBconnection dbconnection = new DBconnection();
+                dbconnection.OpenConnection();
+
+                // Convert TotalPrice to decimal
+                var TotalPriceConvert = ConvertVNDToDecimal(TotalPrice);
+                MessageBox.Show(ClientID + ", " + EmployeeID + ", " + OrderDate + ", " + TotalPriceConvert);
+
+                // Create the query using parameters
+                var query = "INSERT INTO [Order] (ClientID, EmployeeID, OrderDate, TotalPrice) " +
+                            "VALUES (@ClientID, @EmployeeID, @OrderDate, @TotalPrice)";
+
+                // Using SqlCommand to execute the query with parameters
+                using (SqlCommand command = new SqlCommand(query, dbconnection.OpenConnection()))
+                {
+                    command.Parameters.AddWithValue("@ClientID", int.Parse(ClientID.Split(';')[0].Trim())); // Extract only ID
+                    command.Parameters.AddWithValue("@EmployeeID", int.Parse(EmployeeID.Split(';')[0].Trim())); // Extract only ID
+                    command.Parameters.AddWithValue("@OrderDate", DateTime.Parse(OrderDate)); // Ensure the date format is correct
+                    command.Parameters.AddWithValue("@TotalPrice", TotalPriceConvert); // TotalPrice as decimal
+
+                    // Execute the query
+                    command.ExecuteNonQuery(); // This will execute the insert command
+                }
+
+                dbconnection.CloseConnection(); // Close the connection
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message); // Display any errors
+            }
+        }
+
+
+        public decimal ConvertVNDToDecimal(string vndString)
+        {
+            // Remove " VND" and replace "." with "" to handle thousand separators
+            string cleanedString = vndString.Replace(" VND", "").Replace(".", "").Trim();
+
+            // Attempt to parse the cleaned string to decimal
+            if (decimal.TryParse(cleanedString, out decimal totalPrice))
+            {
+                return totalPrice; // Successfully parsed, return the decimal value
+            }
+            else
+            {
+                throw new FormatException("Invalid VND format."); // Handle invalid format
+            }
+        }
+
+
+        private void ReloadDashBoard()
+        {
+            DashBoard dashBoard = (DashBoard)Application.OpenForms["DashBoard"]; // Get instance of DashBoard
+            if (dashBoard != null)
+            {
+                dashBoard.employeeHandler.LoadDataToEmployeeListView();
+                dashBoard.clientHandler.LoadDataToClientListView();
+                dashBoard.productHandler.LoadDataToProductListView();
+                dashBoard.placeOrderHandler.LoadProductToListView();
+            }
         }
     }
 }

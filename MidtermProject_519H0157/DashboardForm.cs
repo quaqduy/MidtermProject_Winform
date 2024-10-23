@@ -46,7 +46,7 @@ namespace MidtermProject_519H0157
             productsList.DoubleClick += new EventHandler(productHandler.productList_DoubleClick);
 
             //PlaceOrder view
-            placeOrderHandler = new placeOrderHandler(productList_view);
+            placeOrderHandler = new placeOrderHandler(productList_view, productList_order, totalPrice_textbox);
             placeOrderHandler.listProduct_view_Custom();
             placeOrderHandler.LoadProductToListView();
             productList_view.DoubleClick += placeOrderHandler.productList_DoubleClick;
@@ -54,6 +54,7 @@ namespace MidtermProject_519H0157
             placeOrderHandler.ProductId_selected = productId_selected;
             placeOrderHandler.ProductName_selected = productName_selected;
             placeOrderHandler.Quantity_order = quantity_order;
+            addProduct_To_Order.Click += placeOrderHandler.addProductToOrder;
 
             orderInfHandler = new orderInfHandler(comboBox_employeeId, comboBox_clientId);
             orderInfHandler.dropDataToEmployeeIDComboBox();
@@ -61,6 +62,7 @@ namespace MidtermProject_519H0157
             comboBox_employeeId.TextChanged += orderInfHandler.comboBox_employeeId_TextChanged;
             comboBox_clientId.TextChanged += orderInfHandler.comboBox_clientId_TextChanged;
             orderInfHandler.generalCurrentDate(orderDate);
+            payBtn.Click += payHanlde;
         }
 
         /*------------------EmployeePage------------------*/
@@ -117,6 +119,42 @@ namespace MidtermProject_519H0157
                     break;
             }
         }
+
+        private void payHanlde(Object sender, EventArgs e)
+        {
+            //Hadle data
+            orderInfHandler.updateQuantityProduct(productList_order, placeOrderHandler.quantityForModifyDB);
+
+            var EmployeeID = comboBox_employeeId.Text;
+            var ClientID = comboBox_clientId.Text;
+            var TotalPrice = totalPrice_textbox.Text;
+            var OrderDate = orderDate.Text;
+            orderInfHandler.createOrder(EmployeeID, ClientID, OrderDate, TotalPrice);
+
+            //Clear Content
+            clearContent();
+        }
+
+        private void clearContent()
+        {
+            // Unsubscribe from TextChanged events
+            comboBox_employeeId.TextChanged -= orderInfHandler.comboBox_employeeId_TextChanged; // Replace with your actual event handler method
+            comboBox_clientId.TextChanged -= orderInfHandler.comboBox_clientId_TextChanged; // Replace with your actual event handler method
+
+            // Clear the fields
+            productId_selected.Text = string.Empty;
+            productName_selected.Text = string.Empty;
+            quantity_order.Text = string.Empty;
+            comboBox_employeeId.Text = string.Empty;
+            comboBox_clientId.Text = string.Empty;
+            totalPrice_textbox.Text = string.Empty;
+            orderInfHandler.generalCurrentDate(orderDate);
+            productList_order.Items.Clear();
+            // Resubscribe to TextChanged events
+            comboBox_employeeId.TextChanged += orderInfHandler.comboBox_employeeId_TextChanged; // Replace with your actual event handler method
+            comboBox_clientId.TextChanged += orderInfHandler.comboBox_clientId_TextChanged; // Replace with your actual event handler method
+        }
+
         /*------------------vvv------------------*/
     }
 }

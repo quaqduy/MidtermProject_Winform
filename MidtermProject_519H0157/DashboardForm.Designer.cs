@@ -53,17 +53,15 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.totalPrice_textbox = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.productList_view = new System.Windows.Forms.ListView();
-            this.button2 = new System.Windows.Forms.Button();
-            this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.payBtn = new System.Windows.Forms.Button();
+            this.productList_order = new System.Windows.Forms.ListView();
             this.comboBox_employeeId = new System.Windows.Forms.ComboBox();
             this.comboBox_clientId = new System.Windows.Forms.ComboBox();
             this.orderDate = new System.Windows.Forms.Label();
+            this.productList_view = new System.Windows.Forms.ListView();
+            this.addProduct_To_Order = new System.Windows.Forms.Button();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.dd = new System.Windows.Forms.Label();
             this.productId_selected = new System.Windows.Forms.Label();
@@ -71,6 +69,12 @@
             this.productName_selected = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.quantity_order = new System.Windows.Forms.TextBox();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.listView1 = new System.Windows.Forms.ListView();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -82,6 +86,8 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
+            this.tabPage6.SuspendLayout();
+            this.flowLayoutPanel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -110,7 +116,7 @@
             this.tabPage1.Controls.Add(this.employeeList);
             this.tabPage1.Location = new System.Drawing.Point(4, 45);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(40, 20, 40, 40);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(40);
             this.tabPage1.Size = new System.Drawing.Size(1065, 574);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Employees";
@@ -159,10 +165,10 @@
             this.employeeList.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.employeeList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.employeeList.HideSelection = false;
-            this.employeeList.Location = new System.Drawing.Point(40, 20);
+            this.employeeList.Location = new System.Drawing.Point(40, 40);
             this.employeeList.Margin = new System.Windows.Forms.Padding(500, 800, 500, 500);
             this.employeeList.Name = "employeeList";
-            this.employeeList.Size = new System.Drawing.Size(983, 512);
+            this.employeeList.Size = new System.Drawing.Size(983, 492);
             this.employeeList.TabIndex = 2;
             this.employeeList.UseCompatibleStateImageBehavior = false;
             // 
@@ -174,7 +180,7 @@
             this.tabPage2.Controls.Add(this.clientsList);
             this.tabPage2.Location = new System.Drawing.Point(4, 45);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(40, 20, 40, 40);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(40);
             this.tabPage2.Size = new System.Drawing.Size(1065, 574);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Clients";
@@ -222,10 +228,10 @@
             this.clientsList.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.clientsList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.clientsList.HideSelection = false;
-            this.clientsList.Location = new System.Drawing.Point(40, 20);
+            this.clientsList.Location = new System.Drawing.Point(40, 40);
             this.clientsList.Margin = new System.Windows.Forms.Padding(500, 800, 500, 500);
             this.clientsList.Name = "clientsList";
-            this.clientsList.Size = new System.Drawing.Size(985, 514);
+            this.clientsList.Size = new System.Drawing.Size(985, 494);
             this.clientsList.TabIndex = 4;
             this.clientsList.UseCompatibleStateImageBehavior = false;
             // 
@@ -237,7 +243,7 @@
             this.tabPage3.Controls.Add(this.productsList);
             this.tabPage3.Location = new System.Drawing.Point(4, 45);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(40, 20, 40, 40);
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(40);
             this.tabPage3.Size = new System.Drawing.Size(1065, 574);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Products";
@@ -285,10 +291,10 @@
             this.productsList.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.productsList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.productsList.HideSelection = false;
-            this.productsList.Location = new System.Drawing.Point(40, 20);
+            this.productsList.Location = new System.Drawing.Point(40, 40);
             this.productsList.Margin = new System.Windows.Forms.Padding(500, 800, 500, 500);
             this.productsList.Name = "productsList";
-            this.productsList.Size = new System.Drawing.Size(985, 514);
+            this.productsList.Size = new System.Drawing.Size(985, 494);
             this.productsList.TabIndex = 6;
             this.productsList.UseCompatibleStateImageBehavior = false;
             // 
@@ -313,14 +319,14 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.productList_view, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.button2, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.addProduct_To_Order, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 46F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1059, 568);
             this.tableLayoutPanel1.TabIndex = 0;
@@ -335,10 +341,10 @@
             this.tableLayoutPanel2.Controls.Add(this.label3, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.label4, 0, 3);
             this.tableLayoutPanel2.Controls.Add(this.label5, 0, 4);
-            this.tableLayoutPanel2.Controls.Add(this.textBox4, 1, 4);
+            this.tableLayoutPanel2.Controls.Add(this.totalPrice_textbox, 1, 4);
             this.tableLayoutPanel2.Controls.Add(this.label6, 0, 5);
-            this.tableLayoutPanel2.Controls.Add(this.button1, 1, 6);
-            this.tableLayoutPanel2.Controls.Add(this.listView1, 1, 5);
+            this.tableLayoutPanel2.Controls.Add(this.payBtn, 1, 6);
+            this.tableLayoutPanel2.Controls.Add(this.productList_order, 1, 5);
             this.tableLayoutPanel2.Controls.Add(this.comboBox_employeeId, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.comboBox_clientId, 1, 2);
             this.tableLayoutPanel2.Controls.Add(this.orderDate, 1, 3);
@@ -354,7 +360,7 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 250F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(313, 454);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(313, 456);
             this.tableLayoutPanel2.TabIndex = 1;
             // 
             // label1
@@ -413,13 +419,13 @@
             this.label5.Text = "Total Prire";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox4
+            // totalPrice_textbox
             // 
-            this.textBox4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox4.Location = new System.Drawing.Point(207, 183);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(121, 35);
-            this.textBox4.TabIndex = 8;
+            this.totalPrice_textbox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.totalPrice_textbox.Location = new System.Drawing.Point(207, 183);
+            this.totalPrice_textbox.Name = "totalPrice_textbox";
+            this.totalPrice_textbox.Size = new System.Drawing.Size(121, 35);
+            this.totalPrice_textbox.TabIndex = 8;
             // 
             // label6
             // 
@@ -431,70 +437,27 @@
             this.label6.TabIndex = 9;
             this.label6.Text = "Selected products: ";
             // 
-            // button1
+            // payBtn
             // 
-            this.button1.BackColor = System.Drawing.Color.YellowGreen;
-            this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button1.ForeColor = System.Drawing.Color.Black;
-            this.button1.Location = new System.Drawing.Point(207, 473);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(121, 34);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "Save";
-            this.button1.UseVisualStyleBackColor = false;
+            this.payBtn.BackColor = System.Drawing.Color.YellowGreen;
+            this.payBtn.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.payBtn.ForeColor = System.Drawing.Color.Black;
+            this.payBtn.Location = new System.Drawing.Point(207, 473);
+            this.payBtn.Name = "payBtn";
+            this.payBtn.Size = new System.Drawing.Size(121, 34);
+            this.payBtn.TabIndex = 11;
+            this.payBtn.Text = "Pay";
+            this.payBtn.UseVisualStyleBackColor = false;
             // 
-            // listView1
+            // productList_order
             // 
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(207, 223);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(121, 244);
-            this.listView1.TabIndex = 12;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            // 
-            // productList_view
-            // 
-            this.productList_view.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.productList_view.HideSelection = false;
-            this.productList_view.Location = new System.Drawing.Point(3, 3);
-            this.productList_view.Name = "productList_view";
-            this.productList_view.Size = new System.Drawing.Size(682, 454);
-            this.productList_view.TabIndex = 0;
-            this.productList_view.UseCompatibleStateImageBehavior = false;
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.GreenYellow;
-            this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button2.Location = new System.Drawing.Point(3, 511);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(682, 54);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Add";
-            this.button2.UseVisualStyleBackColor = false;
-            // 
-            // tabPage6
-            // 
-            this.tabPage6.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.tabPage6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.tabPage6.Location = new System.Drawing.Point(4, 45);
-            this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(1065, 574);
-            this.tabPage6.TabIndex = 5;
-            this.tabPage6.Text = "Manage Orders";
-            // 
-            // tabPage7
-            // 
-            this.tabPage7.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.tabPage7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.tabPage7.Location = new System.Drawing.Point(4, 45);
-            this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(1065, 574);
-            this.tabPage7.TabIndex = 6;
-            this.tabPage7.Text = "Generate Bill";
+            this.productList_order.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.productList_order.HideSelection = false;
+            this.productList_order.Location = new System.Drawing.Point(207, 223);
+            this.productList_order.Name = "productList_order";
+            this.productList_order.Size = new System.Drawing.Size(121, 244);
+            this.productList_order.TabIndex = 12;
+            this.productList_order.UseCompatibleStateImageBehavior = false;
             // 
             // comboBox_employeeId
             // 
@@ -525,6 +488,27 @@
             this.orderDate.Text = "label7";
             this.orderDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // productList_view
+            // 
+            this.productList_view.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.productList_view.HideSelection = false;
+            this.productList_view.Location = new System.Drawing.Point(3, 3);
+            this.productList_view.Name = "productList_view";
+            this.productList_view.Size = new System.Drawing.Size(682, 456);
+            this.productList_view.TabIndex = 0;
+            this.productList_view.UseCompatibleStateImageBehavior = false;
+            // 
+            // addProduct_To_Order
+            // 
+            this.addProduct_To_Order.BackColor = System.Drawing.Color.GreenYellow;
+            this.addProduct_To_Order.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.addProduct_To_Order.Location = new System.Drawing.Point(3, 511);
+            this.addProduct_To_Order.Name = "addProduct_To_Order";
+            this.addProduct_To_Order.Size = new System.Drawing.Size(682, 54);
+            this.addProduct_To_Order.TabIndex = 2;
+            this.addProduct_To_Order.Text = "Add";
+            this.addProduct_To_Order.UseVisualStyleBackColor = false;
+            // 
             // tableLayoutPanel3
             // 
             this.tableLayoutPanel3.ColumnCount = 6;
@@ -541,11 +525,11 @@
             this.tableLayoutPanel3.Controls.Add(this.label11, 4, 0);
             this.tableLayoutPanel3.Controls.Add(this.quantity_order, 5, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 463);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 465);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(682, 42);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(682, 40);
             this.tableLayoutPanel3.TabIndex = 3;
             // 
             // dd
@@ -554,7 +538,7 @@
             this.dd.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dd.Location = new System.Drawing.Point(3, 0);
             this.dd.Name = "dd";
-            this.dd.Size = new System.Drawing.Size(107, 42);
+            this.dd.Size = new System.Drawing.Size(107, 40);
             this.dd.TabIndex = 0;
             this.dd.Text = "ProductId Selected:";
             this.dd.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -565,7 +549,7 @@
             this.productId_selected.Dock = System.Windows.Forms.DockStyle.Fill;
             this.productId_selected.Location = new System.Drawing.Point(116, 0);
             this.productId_selected.Name = "productId_selected";
-            this.productId_selected.Size = new System.Drawing.Size(107, 42);
+            this.productId_selected.Size = new System.Drawing.Size(107, 40);
             this.productId_selected.TabIndex = 1;
             this.productId_selected.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -575,7 +559,7 @@
             this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label9.Location = new System.Drawing.Point(229, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(107, 42);
+            this.label9.Size = new System.Drawing.Size(107, 40);
             this.label9.TabIndex = 2;
             this.label9.Text = "Product Name:";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -586,7 +570,7 @@
             this.productName_selected.Dock = System.Windows.Forms.DockStyle.Fill;
             this.productName_selected.Location = new System.Drawing.Point(342, 0);
             this.productName_selected.Name = "productName_selected";
-            this.productName_selected.Size = new System.Drawing.Size(107, 42);
+            this.productName_selected.Size = new System.Drawing.Size(107, 40);
             this.productName_selected.TabIndex = 3;
             this.productName_selected.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -596,7 +580,7 @@
             this.label11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label11.Location = new System.Drawing.Point(455, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(107, 42);
+            this.label11.Size = new System.Drawing.Size(107, 40);
             this.label11.TabIndex = 4;
             this.label11.Text = "Quantity:";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -608,6 +592,78 @@
             this.quantity_order.Name = "quantity_order";
             this.quantity_order.Size = new System.Drawing.Size(111, 35);
             this.quantity_order.TabIndex = 5;
+            // 
+            // tabPage6
+            // 
+            this.tabPage6.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.tabPage6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.tabPage6.Controls.Add(this.flowLayoutPanel4);
+            this.tabPage6.Controls.Add(this.listView1);
+            this.tabPage6.Location = new System.Drawing.Point(4, 45);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(40);
+            this.tabPage6.Size = new System.Drawing.Size(1065, 574);
+            this.tabPage6.TabIndex = 5;
+            this.tabPage6.Text = "Manage Orders";
+            // 
+            // tabPage7
+            // 
+            this.tabPage7.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.tabPage7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.tabPage7.Location = new System.Drawing.Point(4, 45);
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage7.Size = new System.Drawing.Size(1065, 574);
+            this.tabPage7.TabIndex = 6;
+            this.tabPage7.Text = "Generate Bill";
+            // 
+            // flowLayoutPanel4
+            // 
+            this.flowLayoutPanel4.Controls.Add(this.button1);
+            this.flowLayoutPanel4.Controls.Add(this.button2);
+            this.flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.flowLayoutPanel4.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flowLayoutPanel4.Location = new System.Drawing.Point(40, 497);
+            this.flowLayoutPanel4.Name = "flowLayoutPanel4";
+            this.flowLayoutPanel4.Size = new System.Drawing.Size(985, 37);
+            this.flowLayoutPanel4.TabIndex = 9;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.GreenYellow;
+            this.button1.Font = new System.Drawing.Font("MV Boli", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(890, 3);
+            this.button1.Name = "button1";
+            this.button1.Padding = new System.Windows.Forms.Padding(2);
+            this.button1.Size = new System.Drawing.Size(92, 30);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "Add";
+            this.button1.UseVisualStyleBackColor = false;
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.Red;
+            this.button2.Font = new System.Drawing.Font("MV Boli", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.ForeColor = System.Drawing.Color.White;
+            this.button2.Location = new System.Drawing.Point(792, 3);
+            this.button2.Name = "button2";
+            this.button2.Padding = new System.Windows.Forms.Padding(2);
+            this.button2.Size = new System.Drawing.Size(92, 30);
+            this.button2.TabIndex = 1;
+            this.button2.Text = "Delete";
+            this.button2.UseVisualStyleBackColor = false;
+            // 
+            // listView1
+            // 
+            this.listView1.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView1.HideSelection = false;
+            this.listView1.Location = new System.Drawing.Point(40, 40);
+            this.listView1.Margin = new System.Windows.Forms.Padding(500, 800, 500, 500);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(985, 494);
+            this.listView1.TabIndex = 8;
+            this.listView1.UseCompatibleStateImageBehavior = false;
             // 
             // DashBoard
             // 
@@ -634,6 +690,8 @@
             this.tableLayoutPanel2.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
+            this.tabPage6.ResumeLayout(false);
+            this.flowLayoutPanel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -667,11 +725,11 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox totalPrice_textbox;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.Button payBtn;
+        private System.Windows.Forms.Button addProduct_To_Order;
+        private System.Windows.Forms.ListView productList_order;
         private System.Windows.Forms.ComboBox comboBox_employeeId;
         private System.Windows.Forms.ComboBox comboBox_clientId;
         private System.Windows.Forms.Label orderDate;
@@ -682,5 +740,9 @@
         private System.Windows.Forms.Label productName_selected;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox quantity_order;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ListView listView1;
     }
 }

@@ -546,6 +546,7 @@ namespace MidtermProject_519H0157
                 dashBoard.clientHandler.LoadDataToClientListView();
                 dashBoard.productHandler.LoadDataToProductListView();
                 dashBoard.placeOrderHandler.LoadProductToListView();
+
             }
         }
 
