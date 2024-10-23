@@ -174,10 +174,9 @@ namespace MidtermProject_519H0157
             }
         }
 
-        public List<string> quantityForModifyDB; 
+        public List<string> quantityForModifyDB = new List<string>(); 
         public void addProductToOrder(object sender, EventArgs e)
         {
-            quantityForModifyDB = new List<string>();
             var productID = productId_selected.Text;
             // SQL query to get data from Product table where ID matches the selected productID
             string query = "SELECT ID, Name, Description, Price, Quantity FROM Product WHERE ID = " + productID;
@@ -246,7 +245,6 @@ namespace MidtermProject_519H0157
 
                                 productList_order.Items.Add(item);
                             }
-
                             // Update the total price after adding/updating
                             updateTotalPrice();
                         }

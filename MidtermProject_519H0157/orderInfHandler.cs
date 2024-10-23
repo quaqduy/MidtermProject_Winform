@@ -167,48 +167,41 @@ namespace MidtermProject_519H0157
 
         public void updateQuantityProduct(ListView productList_order, List<string> quantityForModifyDB)
         {
-            // Iterate through each item in the ListView
-            var count = 0;
-            foreach (ListViewItem item in productList_order.Items)
-            {
-                // Assuming the product ID is in the first subitem (index 0)
-                string productId = item.Text; // or item.SubItems[0].Text for the ID in a subitem
-                string quantityOrder = item.SubItems[3].Text;
+            try {
+                // Iterate through each item in the ListView
+                var count = 0;
+                foreach (ListViewItem item in productList_order.Items)
+                {
+                    if(count < quantityForModifyDB.Count)
+                    {
+                        // Assuming the product ID is in the first subitem (index 0)
+                        string productId = item.Text; // or item.SubItems[0].Text for the ID in a subitem
+                        string quantityOrder = item.SubItems[3].Text;
 
-                var newQuantity = int.Parse(quantityForModifyDB[count]) - int.Parse(quantityOrder);
+                        //MessageBox.Show(quantityOrder);
 
-                DBconnection dbconnection = new DBconnection();
-                dbconnection.OpenConnection();
+                        var newQuantity = int.Parse(quantityForModifyDB[count]) - int.Parse(quantityOrder);
 
-                var query = "UPDATE Product SET Quantity = "+ newQuantity + " WHERE ID = "+ productId;
-                dbconnection.ExecuteQuery(query);
+                        DBconnection dbconnection = new DBconnection();
+                        dbconnection.OpenConnection();
 
-                dbconnection.CloseConnection();
-                count++;
+                        var query = "UPDATE Product SET Quantity = " + newQuantity + " WHERE ID = " + productId;
+                        dbconnection.ExecuteQuery(query);
+
+                        dbconnection.CloseConnection();
+                    }
+                    count++;
+                }
             }
+            catch(SqlException e)
+            {
+                MessageBox.Show(e.Message);
+            }            
 
             ReloadDashBoard();
         }
-        //public void createOrder(string ClientID, string EmployeeID, string OrderDate, string TotalPrice)
-        //{
-        //    try
-        //    {
-        //        DBconnection dbconnection = new DBconnection();
-        //        var TotalPriceConvert = ConvertVNDToDecimal(TotalPrice);
-        //        var EmployeeIDConvert = int.Parse(EmployeeID.Split(new string[] { " ; " }, StringSplitOptions.None)[0]);
-        //        var ClientIDConvert = int.Parse(ClientID.Split(new string[] { " ; " }, StringSplitOptions.None)[0]);
-        //        var query = "INSERT INTO [Order] (ClientID, EmployeeID, OrderDate, TotalPrice) " +
-        //               "VALUES (" + ClientIDConvert + ", " + EmployeeIDConvert + ", " + OrderDate + ", " + TotalPriceConvert + ")";
-        //        MessageBox.Show(query);
-        //        dbconnection.ExecuteQuery(query);
-        //    }
-        //    catch (SqlException ex)
-        //    {
-        //        MessageBox.Show(ex.Message);
-        //    }
-        //}
 
-        public void createOrder(string EmployeeID, string ClientID , string OrderDate, string TotalPrice)
+        public int createOrder(string EmployeeID, string ClientID, string OrderDate, string TotalPrice)
         {
             try
             {
@@ -217,11 +210,13 @@ namespace MidtermProject_519H0157
 
                 // Convert TotalPrice to decimal
                 var TotalPriceConvert = ConvertVNDToDecimal(TotalPrice);
-                MessageBox.Show(ClientID + ", " + EmployeeID + ", " + OrderDate + ", " + TotalPriceConvert);
 
-                // Create the query using parameters
+                // Create the query using parameters and retrieve the last inserted ID
                 var query = "INSERT INTO [Order] (ClientID, EmployeeID, OrderDate, TotalPrice) " +
+                            "OUTPUT INSERTED.ID " + // Output the newly inserted Order ID
                             "VALUES (@ClientID, @EmployeeID, @OrderDate, @TotalPrice)";
+
+                int orderId = 0; // Variable to store the returned Order ID
 
                 // Using SqlCommand to execute the query with parameters
                 using (SqlCommand command = new SqlCommand(query, dbconnection.OpenConnection()))
@@ -231,17 +226,61 @@ namespace MidtermProject_519H0157
                     command.Parameters.AddWithValue("@OrderDate", DateTime.Parse(OrderDate)); // Ensure the date format is correct
                     command.Parameters.AddWithValue("@TotalPrice", TotalPriceConvert); // TotalPrice as decimal
 
-                    // Execute the query
-                    command.ExecuteNonQuery(); // This will execute the insert command
+                    // Execute the query and retrieve the Order ID
+                    orderId = (int)command.ExecuteScalar(); // ExecuteScalar returns the first column of the first row, which is the Order ID
                 }
 
                 dbconnection.CloseConnection(); // Close the connection
+
+                return orderId; // Return the newly created Order ID
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message); // Display any errors
+                return -1; // Return -1 or any other error code in case of failure
+            }
+        }
+
+        public void createOrderItem(int orderId, ListView productList_order)
+        {
+            try
+            {
+                DBconnection dbconnection = new DBconnection();
+                dbconnection.OpenConnection();
+
+                // Query for inserting data into OrderItem table
+                var query = "INSERT INTO OrderItem (OrderID, ProductID, Quantity) " +
+                            "VALUES (@OrderID, @ProductID, @Quantity)";
+
+                // Using SqlCommand to execute the query with parameters
+                using (SqlCommand command = new SqlCommand(query, dbconnection.OpenConnection()))
+                {
+                    // Loop through each item in the ListView
+                    foreach (ListViewItem item in productList_order.Items)
+                    {
+                        // Extract product ID and quantity from ListView item
+                        string productID = item.SubItems[0].Text;  // ProductID is in the first column
+                        string quantity = item.SubItems[3].Text;   // Quantity is in the fourth column
+
+                        // Add parameters to the SQL command
+                        command.Parameters.Clear();  // Clear previous parameters before adding new ones
+                        command.Parameters.AddWithValue("@OrderID", orderId);
+                        command.Parameters.AddWithValue("@ProductID", int.Parse(productID));
+                        command.Parameters.AddWithValue("@Quantity", int.Parse(quantity));
+
+                        // Execute the insert command for each product in the order
+                        command.ExecuteNonQuery();
+                    }
+                }
+
+                dbconnection.CloseConnection(); // Close the connection after all items are inserted
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message); // Display any errors
             }
         }
+
 
 
         public decimal ConvertVNDToDecimal(string vndString)

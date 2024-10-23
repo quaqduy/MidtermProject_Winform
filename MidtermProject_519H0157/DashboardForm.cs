@@ -129,8 +129,9 @@ namespace MidtermProject_519H0157
             var ClientID = comboBox_clientId.Text;
             var TotalPrice = totalPrice_textbox.Text;
             var OrderDate = orderDate.Text;
-            orderInfHandler.createOrder(EmployeeID, ClientID, OrderDate, TotalPrice);
-
+            var orderId = orderInfHandler.createOrder(EmployeeID, ClientID, OrderDate, TotalPrice);
+            orderInfHandler.createOrderItem(orderId,productList_order);
+            MessageBox.Show("Success to payment.");
             //Clear Content
             clearContent();
         }
