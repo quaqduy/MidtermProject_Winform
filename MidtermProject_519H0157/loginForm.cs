@@ -94,19 +94,20 @@ namespace MidtermProject_519H0157
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            //string msg = loginAuth(txtEmail, txtPassword);
-            //if (!string.IsNullOrEmpty(msg))
-            //{
-            //    lblMessage.Visible = true;
-            //    lblMessage.Text = msg;
-            //}
-
-            //MessageBox.Show("Sucess to login ");
-
-            //after signIn open dashboad
-            DashBoard DashBoard = new DashBoard();
-            this.Hide();
-            DashBoard.Show();
+            //account: email: admin@gmail.com; pass: Admin123
+            string msg = loginAuth(txtEmail, txtPassword);
+            if (!string.IsNullOrEmpty(msg))
+            {
+                lblMessage.Visible = true;
+                lblMessage.Text = msg;
+            }
+            if (checkedAccountDB(txtEmail.Text, txtPassword.Text))
+            {
+                //after signIn open dashboad
+                DashBoard DashBoard = new DashBoard();
+                this.Hide();
+                DashBoard.Show();
+            }
         }
 
         public string loginAuth(TextBox txtEmail, TextBox txtPassword)
@@ -160,8 +161,6 @@ namespace MidtermProject_519H0157
 
                 try
                 {
-                    conn.Open(); // Open the connection
-
                     int count = (int)command.ExecuteScalar(); // Execute the query and get the result
                     return count > 0; // Return true if a matching record exists
                 }
