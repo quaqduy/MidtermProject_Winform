@@ -515,7 +515,7 @@ namespace MidtermProject_519H0157
         }
 
         //ANALYSIS
-        private void AnalysisCreateAndShow()
+        public void AnalysisCreateAndShow()
         {
             var plotModel = new PlotModel { Title = "Product Sales Quantity" };
 

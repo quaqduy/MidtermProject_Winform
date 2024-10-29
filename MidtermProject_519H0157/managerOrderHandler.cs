@@ -154,17 +154,20 @@ namespace MidtermProject_519H0157
                 // Fetch product details from OrderItem based on OrderID
                 using (SqlCommand commandOrderItem = new SqlCommand(queryOrderItem, db.OpenConnection()))
                 {
-                    commandOrderItem.Parameters.AddWithValue("@OrderID", int.Parse(LO_idLable.Text));
-
-                    using (SqlDataReader readerOrderItem = commandOrderItem.ExecuteReader())
+                    if (!string.IsNullOrEmpty(LO_idLable.Text))
                     {
-                        while (readerOrderItem.Read())
-                        {
-                            string productId = readerOrderItem["ProductID"].ToString();
-                            string quantity = readerOrderItem["Quantity"].ToString();
+                        commandOrderItem.Parameters.AddWithValue("@OrderID", int.Parse(LO_idLable.Text));
 
-                            // Store the productId and quantity to use after closing the reader
-                            productData.Add(new Tuple<string, string>(productId, quantity));
+                        using (SqlDataReader readerOrderItem = commandOrderItem.ExecuteReader())
+                        {
+                            while (readerOrderItem.Read())
+                            {
+                                string productId = readerOrderItem["ProductID"].ToString();
+                                string quantity = readerOrderItem["Quantity"].ToString();
+
+                                // Store the productId and quantity to use after closing the reader
+                                productData.Add(new Tuple<string, string>(productId, quantity));
+                            }
                         }
                     }
                 }
@@ -295,6 +298,12 @@ namespace MidtermProject_519H0157
             createBill();
             billHandler.loadDataToListBill();
             GeneratePdf(LO_idLable_text, LO_clientIDLable_text, LO_employeeIDLable_text, DateTime.Now, LO_totalPriceLable_text);
+            DashBoard dashBoard = (DashBoard)Application.OpenForms["DashBoard"]; // Get instance of DashBoard
+            if (dashBoard != null)
+            {
+                // Call the method to reload data
+                dashBoard.AnalysisCreateAndShow();
+            }
         }
 
         private void createBill()
